@@ -1,0 +1,18 @@
+language: node_js
+node_js:
+  - '4.1'
+before_script:
+  - npm install -g bower grunt-cli
+  - bower install
+  - grunt build
+deploy:
+  provider: s3
+  access_key_id: AKIAIYODYIPWZX2ZAZDA
+  region: eu-central-1
+  skip_cleanup: true
+  local_dir: dist
+  secret_access_key:
+    secure: "aULTMGexn0AAkqtTUic3wnz3EBTYWC53/7YndhB8thJzZv1reDIzMAUJP7xjxwoRIk5BgOn8oaXCKLXTahTwc08TjxzUivUIoEGOVZRBs4Xc7Cjxjz/5s4liJSqw9mXF7VNVdBwm1JaaE8CXUoFcjBQue40ycwRuSg5pyUgeypXIeH+vsnFKfdYGC8hZ9UQUr3u8tVw5Mz+5XjTT4a1SI2ETi+z/zuxR6iT3iY3jOAUVBQvOGjS1XI14KnoYb3J9r7H/CDA48We4/gKHB38QLiXMXD7sOyB8b1jk/WNOomIxdQLV1F3NKRW+jtJerUHF4+BxwCXlE/w6FjNC3ry6ZOVSTF2xSTSRE+kmuDIifOMuX38CXQ7Ks2CMbAIpRqPvxmPbt5XEyR0M+Ebx7KSrl5FlZIeWYdZuKjAzeibGVcRH0XarivYYl872+ASy3nmmLPh9xFtkFn4Cw7yqVNq9nTOh0sWC7gu5HVjKGcPEO6Kq0NSUrZV86Zq4yd1mhcGDQWkdMkzCF4IVbWbf5sn80hnUJ+viaWOy2g7uH6a2J2uFPnxIMs6UyZkQiEHIF6UyEBmbtTumKvgvE6hZc5s3MrdhzTPsqcIWwsWjtNnqiNeERkKtPjpWq5AY/MJ5pO9EhlJHFTEqxwHTbfW0rOOMOwAWTOw686phhwObrgqMu7A="  
+  bucket: www.eigenmusik.com
+  on:
+    repo: EigenMusik/eigenmusik-frontend
