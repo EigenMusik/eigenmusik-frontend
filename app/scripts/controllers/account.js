@@ -16,9 +16,7 @@ angular.module('eigenmusik')
             .login('user0', '123450')
             .then(function(data) {
                 TokenStore.set(data.access_token); //jscs:disable
-                console.log('Success!');
             }, function() {
-                console.log('Fail.');
             }
         );
     };

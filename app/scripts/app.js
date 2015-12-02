@@ -1,6 +1,6 @@
 'use strict';
 
-// Global configuration vars.
+// Globals configuration.
 var REST_API;
 
 /**
@@ -18,7 +18,7 @@ angular
     'ngResource',
     'ngRoute',
     'ngSanitize',
-    'ngTouch',
+    'ngTouch'
   ])
   .config(function ($routeProvider, TokenServiceProvider) {
 
