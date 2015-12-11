@@ -5,13 +5,12 @@ describe('Controller: MainCtrl', function () {
   // load the controller's module
   beforeEach(module('eigenmusik'));
 
-  var MainCtrl,
-    scope;
+  var LoginController, scope;
 
   // Initialize the controller and a mock scope
   beforeEach(inject(function ($controller, $rootScope) {
     scope = $rootScope.$new();
-    MainCtrl = $controller('MainCtrl', {
+    LoginController = $controller('LoginController', {
       $scope: scope
       // place here mocked dependencies
     });

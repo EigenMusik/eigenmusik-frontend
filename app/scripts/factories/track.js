@@ -1,15 +1,14 @@
 'use strict';
 /* globals REST_API */
 
-
 /**
  * @ngdoc function
- * @name eigenmusik.controller:AboutCtrl
+ * @name eigenmusik.factory:Track
  * @description
- * # AboutCtrl
- * Controller of the eigenmusik
+ * # Track
+ * Track factory
  */
 angular.module('eigenmusik')
   .factory('Track', function($resource) {
-  return $resource(REST_API + '/rest/tracks/:id', {}, {'query': {method: 'GET', isArray: false }});
+  return $resource(REST_API + '/rest/tracks', {}, {'query': {method: 'GET', isArray: false }});
 });
