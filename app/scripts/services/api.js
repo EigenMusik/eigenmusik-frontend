@@ -27,6 +27,16 @@ angular.module('eigenmusik')
                         ret.reject(err);
                 });
                 return ret.promise;
+            },
+            getTracks: function() {
+                var ret = $q.defer();
+                $http.get(apiUrl + '/rest/tracks')
+                    .success(function(r) {
+                        ret.resolve(r);
+                }).error(function(err) {
+                    ret.reject(err);
+                });
+                return ret.promise;
             }
         };
     };
