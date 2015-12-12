@@ -1,0 +1,26 @@
+<table class="table table-hover">
+    <thead>
+        <th>TRACK</th>
+        <th>ARTIST</th>
+        <th>TIME</th>
+        <th>ALBUM</th>
+        <th>ADDED</th>
+    </thead>
+    <tbody>
+        <tr ng-repeat="t in tracks">
+            <td>
+                <a>{{t.name}}</a>
+            </td>
+            <td>
+                <a>{{t.artist.name}}</a>
+            </td>
+            <td>{{t.duration | displaytime}}</td>
+            <td>
+                <a>{{t.album.name}}</a>
+            </td>
+            <td>
+                {{t.createdOn | timeago}}
+            </td>
+        </tr>
+    </tbody>
+</table>

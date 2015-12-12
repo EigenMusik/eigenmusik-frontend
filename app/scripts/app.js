@@ -47,7 +47,11 @@ angular
     TokenServiceProvider.setClientDetails('web', 'secret');
     APIProvider.setApiUrl(REST_API);
 
-    $routeProvider
+    $routeProvider.
+      when('/login', {
+        templateUrl: 'partials/login.html',
+        controller: 'LoginController'
+      })
       .otherwise({
         redirectTo: '/'
     });
