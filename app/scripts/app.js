@@ -1,6 +1,6 @@
 'use strict';
 
-// Global configuration vars.
+// Globals configuration.
 var REST_API;
 
 /**
@@ -18,9 +18,9 @@ angular
     'ngResource',
     'ngRoute',
     'ngSanitize',
-    'ngTouch',
+    'ngTouch'
   ])
-  .config(function ($routeProvider, TokenServiceProvider) {
+  .config(function($routeProvider, TokenServiceProvider, APIProvider) {
 
     var prod;
     // Detect current environment.
@@ -43,29 +43,12 @@ angular
     } else {
       REST_API = 'http://localhost:7070';
     }
+    TokenServiceProvider.setTokenUrl(REST_API + '/oauth/token');
+    TokenServiceProvider.setClientDetails('web', 'secret');
+    APIProvider.setApiUrl(REST_API);
 
     $routeProvider
-      .when('/', {
-        templateUrl: 'views/main.html',
-        controller: 'MainCtrl',
-        controllerAs: 'main'
-      })
-      .when('/account', {
-        templateUrl: 'views/account.html',
-        controller: 'AccountCtrl',
-        controllerAs: 'account'
-      })
-      .when('/tracks', {
-        templateUrl: 'views/tracks.html',
-        controller: 'TracksCtrl',
-        controllerAs: 'tracks'
-      })
       .otherwise({
         redirectTo: '/'
-      });
-
-
-      TokenServiceProvider.setTokenUrl(REST_API + '/oauth/token');
-      TokenServiceProvider.setClientDetails('web', 'secret');
-
+    });
   });
