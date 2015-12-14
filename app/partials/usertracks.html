@@ -1,26 +1,30 @@
-<table class="table table-hover">
-    <thead>
-        <th>TRACK</th>
-        <th>ARTIST</th>
-        <th>TIME</th>
-        <th>ALBUM</th>
-        <th>ADDED</th>
-    </thead>
-    <tbody>
-        <tr ng-repeat="t in tracks">
-            <td>
-                <a>{{t.name}}</a>
-            </td>
-            <td>
-                <a>{{t.artist.name}}</a>
-            </td>
-            <td>{{t.duration | displaytime}}</td>
-            <td>
-                <a>{{t.album.name}}</a>
-            </td>
-            <td>
-                {{t.createdOn | timeago}}
-            </td>
-        </tr>
-    </tbody>
-</table>
+<div id="tracks-wrapper">
+    <table id="tracks-table" class="table table-fixedheader" style="table-layout:fixed">
+        <thead>
+            <tr>
+                <th>TRACK</th>
+                <th>ARTIST</th>
+                <th>TIME</th>
+                <th>ALBUM</th>
+                <th>ADDED</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="t in tracks" ng-click="play($index)" ng-class="trackClass($index)">
+                <td>
+                    <a>{{t.name}}</a>
+                </td>
+                <td>
+                    <a>{{t.artist.name}}</a>
+                </td>
+                <td>{{t.duration | displaytime}}</td>
+                <td>
+                    <a>{{t.album.name}}</a>
+                </td>
+                <td>
+                    {{t.createdOn | timeago}}
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
