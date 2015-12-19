@@ -19,11 +19,16 @@ angular.module('eigenmusik')
     $scope.playing = false;
     $scope.loadingTrack = false;
 
+    var TRACK_RESTART_THRESHOLD = 5;
+
     $scope.playPrev = function() {
-        if ($scope.currentTrack === null || $scope.currentTrackNumber === 0) {
+        if ($scope.currentTrack === null) {
             return;
+        } else if ($scope.currentTrack.stream.currentTime < TRACK_RESTART_THRESHOLD || $scope.currentTrackNumber === 0) {
+            $scope.currentTrack.stream.currentTime = 0;
+        } else {
+            $scope.play($scope.currentTrackNumber - 1);
         }
-        $scope.play($scope.currentTrackNumber - 1);
     };
 
     $scope.playNext = function() {
