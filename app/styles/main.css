@@ -26,6 +26,10 @@ body {
     margin: 10px;
 }
 
+#track-details {
+  height: 50px;
+}
+
 #tracks-wrapper {
     position: fixed;
     height:300px;
