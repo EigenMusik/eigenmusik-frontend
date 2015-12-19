@@ -21,17 +21,17 @@ angular.module('eigenmusik')
 
     var TRACK_RESTART_THRESHOLD = 5;
 
-    $scope.playPrev = function() {
+    $scope.prev = function(force) {
         if ($scope.currentTrack === null) {
             return;
-        } else if ($scope.currentTrack.stream.currentTime < TRACK_RESTART_THRESHOLD || $scope.currentTrackNumber === 0) {
+        } else if (($scope.currentTrack.stream.currentTime < TRACK_RESTART_THRESHOLD && !force) || $scope.currentTrackNumber === 0) {
             $scope.currentTrack.stream.currentTime = 0;
         } else {
             $scope.play($scope.currentTrackNumber - 1);
         }
     };
 
-    $scope.playNext = function() {
+    $scope.next = function() {
         if ($scope.currentTrack === null || $scope.tracks.length === $scope.currentTrackNumber - 1) {
             return;
         }
