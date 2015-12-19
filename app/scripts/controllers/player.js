@@ -86,7 +86,7 @@ angular.module('eigenmusik')
                 $scope.$apply();
                 $scope.loadingTrack = false;
                 $scope.currentTrack.stream.addEventListener('ended', function(){
-                    $scope.playNext();
+                    $scope.next();
                 });
             }
         );
