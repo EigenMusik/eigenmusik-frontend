@@ -1,14 +1,18 @@
 'use strict';
 
-var Soundcloud;
-
+/**
+ * @ngdoc function
+ * @name eigenmusik.factory:TrackFactory
+ * @description
+ * # TrackFactory
+ * Builds a track from the given playback source.
+ */
 angular.module('eigenmusik')
-.factory('TrackFactory', function () {
+.factory('TrackFactory', function (SoundcloudTrack) {
     return {
-        new: function(track) {
+        build: function(track) {
             if (track.type === 'SOUNDCLOUD') {
-            	var sc = new Soundcloud();
-                return sc.getAudio(track);
+                return SoundcloudTrack.build(track);
             }
             return;
         }

@@ -2,7 +2,7 @@
 <html ng-app="eigenmusik">
   <head>
     <meta charset="utf-8">
-    <title>EigenMusik | A better web player</title>
+    <title></title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width">
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
@@ -19,23 +19,25 @@
     <!--[if lte IE 8]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
-    <div class="container-fluid">
-      <div ng-show="showplayer" ng-controller="PlayerController" ng-include="'partials/player.html'" ng-cloak></div>
-      <div ng-show="showlogin" ng-controller="LoginController" ng-include="'partials/login.html'" ng-cloak></div>
+
+    <div class="container">
+      <div ng-show="showplayer" ng-controller="PlayerController" ng-include="'partials/player.html'"></div>
+      <div class="row" ng-show="showlogin" ng-controller="LoginController" ng-include="'partials/login.html'"></div>
     </div>
+
     <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
-    <script>
-       !function(A,n,g,u,l,a,r){A.GoogleAnalyticsObject=l,A[l]=A[l]||function(){
-       (A[l].q=A[l].q||[]).push(arguments)},A[l].l=+new Date,a=n.createElement(g),
-       r=n.getElementsByTagName(g)[0],a.src=u,r.parentNode.insertBefore(a,r)
-       }(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+       <script>
+    //    !function(A,n,g,u,l,a,r){A.GoogleAnalyticsObject=l,A[l]=A[l]||function(){
+    //    (A[l].q=A[l].q||[]).push(arguments)},A[l].l=+new Date,a=n.createElement(g),
+    //    r=n.getElementsByTagName(g)[0],a.src=u,r.parentNode.insertBefore(a,r)
+    //    }(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
 
-       ga('create', 'UA-71576365-1');
-       ga('send', 'pageview');
-    </script>
+    //    ga('create', 'UA-XXXXX-X');
+    //    ga('send', 'pageview');
+    // </script>
 
-    <!-- Libs not registered on bower -->
-    <script src="https://connect.soundcloud.com/sdk/sdk-3.0.0.js"></script>
+    <!-- Manually loaded scripts -->
+  <!--  <script src="https://connect.soundcloud.com/sdk/sdk-3.0.0.js"></script>-->
 
     <!-- build:js(.) scripts/vendor.js -->
     <!-- bower:js -->
@@ -58,11 +60,10 @@
     <script src="scripts/controllers/login.js"></script>
     <script src="scripts/services/token.js"></script>
     <script src="scripts/services/api.js"></script>
-    <script src="scripts/factories/soundcloud.js"></script>
-    <script src="scripts/factories/trackFactory.js"></script>
     <script src="scripts/filters/displaytimes.js"></script>
     <script src="scripts/filters/timeago.js"></script>
+    <script src="scripts/factories/track.js"></script>
     <!-- endbuild -->
 
-  </body>
+</body>
 </html>

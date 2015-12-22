@@ -6,7 +6,7 @@
  * @name eigenmusik.factory:API
  * @description
  * # API
- * API for eigenmusik
+ * API for eigenmusik.
  */
 angular.module('eigenmusik')
 .provider('API', function () {

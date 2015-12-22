@@ -5,7 +5,7 @@
  * @name eigenmusik.service:TokenStore
  * @description
  * # TokenStore
- * TokenStore for eigenmusik
+ * TokenStore for eigenmusik.
  */
 angular.module('eigenmusik')
 .service('TokenStore', function($window) {
