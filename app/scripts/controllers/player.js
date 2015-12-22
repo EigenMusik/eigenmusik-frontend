@@ -1,7 +1,5 @@
 'use strict';
 
-var $;
-
 /**
  * @ngdoc function
  * @name eigenmusik.controller:PlayerController
@@ -14,25 +12,24 @@ angular.module('eigenmusik')
 
     $scope.user = null;
     $scope.tracks = null;
-    $scope.queue = null;
     $scope.currentTrack = null;
-    $scope.playing = false;
     $scope.loadingTrack = false;
+    $scope.currentTrackNumber = null;
 
     var TRACK_RESTART_THRESHOLD = 5;
 
     $scope.prev = function(force) {
         if ($scope.currentTrack === null) {
             return;
-        } else if (($scope.currentTrack.stream.currentTime < TRACK_RESTART_THRESHOLD && !force) || $scope.currentTrackNumber === 0) {
-            $scope.currentTrack.stream.currentTime = 0;
+        } else if (($scope.currentTrack.getCurrentTime() < TRACK_RESTART_THRESHOLD && !force) || $scope.currentTrackNumber === 0) {
+            $scope.currentTrack.restart();
         } else {
             $scope.play($scope.currentTrackNumber - 1);
         }
     };
 
     $scope.next = function() {
-        if ($scope.currentTrack === null || $scope.tracks.length === $scope.currentTrackNumber - 1) {
+        if ($scope.currentTrack === null || $scope.tracks.length === $scope.currentTrackNumber + 1) {
             return;
         }
         $scope.play($scope.currentTrackNumber + 1);
@@ -46,23 +43,21 @@ angular.module('eigenmusik')
 
     $scope.playPause = function() {
         if ($scope.currentTrack) {
-            if ($scope.currentTrack.stream.paused){
-                $scope.currentTrack.stream.play();
-                $scope.playing = true;
+            if (!$scope.currentTrack.isPlaying()){
+                $scope.currentTrack.play();
             } else {
-                $scope.currentTrack.stream.pause();
-                $scope.playing = false;
+                $scope.currentTrack.pause();
             }
         } else {
             $scope.play(0);
-            $scope.playing = true;
         }
     };
 
     $scope.play = function(trackNumber) {
-
         if ($scope.loadingTrack) {
             return;
+        } else {
+            $scope.loadingTrack = true;
         }
 
         var track = $scope.tracks[trackNumber];
@@ -77,28 +72,21 @@ angular.module('eigenmusik')
 
         $scope.currentTrackNumber = trackNumber;
 
-        $scope.loadingTrack = true;
-        TrackFactory.new(track).then(
-            function(playableTrack) {
-                $scope.currentTrack = playableTrack;
-                $scope.currentTrack.stream.play();
-                $scope.playing = true;
-                $scope.$apply();
-                $scope.loadingTrack = false;
-                $scope.currentTrack.stream.addEventListener('ended', function(){
-                    $scope.next();
-                });
-            }
-        );
+        TrackFactory.build(track).then(function(currentTrack) {
+            currentTrack.onFinish(function() {
+                $scope.next();
+            });
+            currentTrack.play();
+            $scope.currentTrack = currentTrack;
+            $scope.$apply();
+            $scope.loadingTrack = false;
+        });
     };
 
     $scope.stop = function() {
         if ($scope.currentTrack !== null) {
-            $scope.currentTrack.stream.src = '';
-            $scope.currentTrack.stream.load();
+            $scope.currentTrack.stop();
             $scope.currentTrack = null;
-            $scope.playing = false;
-            $scope.loadingTrack = false;
             $scope.currentTrackNumber = null;
         }
     };
@@ -119,23 +107,4 @@ angular.module('eigenmusik')
     $rootScope.$on('logout', function() {
         $scope.stop();
     });
-
-    // TODO move into a directive
-    $scope.resizeTable = function() {
-        // In case of premature resizing.
-        if (typeof $('#tracks-wrapper').offset() === 'undefined') {
-            return;
-        }
-        // Let wrapper fill screen.
-        var wrapperHeight = ($(window).height() - $('#tracks-wrapper').offset().top) + 'px';
-        $('#tracks-wrapper').css('height', wrapperHeight);
-        // Let table fill wrapper.
-        var newHeight = ($('#tracks-wrapper').height() - 50) + 'px';
-        $('#tracks-table tbody').css('height', newHeight);
-    };
-
-    $(window).resize(function(){
-        $scope.resizeTable();
-    });
-
 });

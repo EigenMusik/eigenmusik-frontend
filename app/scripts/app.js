@@ -9,7 +9,7 @@ var REST_API;
  * @description
  * # eigenmusik
  *
- * Main module of the application.
+ * Configuration of the application.
  */
 angular
   .module('eigenmusik', [

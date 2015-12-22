@@ -1,5 +1,5 @@
-<div id="tracks-wrapper">
-    <table id="tracks-table" class="table table-fixedheader" style="table-layout:fixed">
+<resizable-table ng-style="wrapperStyle()" id="tracks-wrapper">
+    <table id="tracks-table" class="table table-fixedheader">
         <thead>
             <tr>
                 <th>TRACK</th>
@@ -9,7 +9,7 @@
                 <th>ADDED</th>
             </tr>
         </thead>
-        <tbody>
+        <tbody ng-style="tbodyStyle()">
             <tr ng-repeat="t in tracks" ng-click="play($index)" ng-class="trackClass($index)">
                 <td>
                     <a>{{t.name}}</a>

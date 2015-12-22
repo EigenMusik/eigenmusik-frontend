@@ -14,7 +14,7 @@ angular.module('eigenmusik')
     $scope.username = 'user0';
     $scope.password = '123450';
 
-    $scope.processForm = function() {
+    $scope.login = function() {
         TokenService
             .login($scope.username, $scope.password)
             .then(function(data) {
@@ -27,5 +27,4 @@ angular.module('eigenmusik')
             }
         );
     };
-
 });
