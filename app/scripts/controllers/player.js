@@ -78,8 +78,8 @@ angular.module('eigenmusik')
             });
             currentTrack.play();
             $scope.currentTrack = currentTrack;
-            $scope.$apply();
             $scope.loadingTrack = false;
+            $scope.$apply();
         });
     };
 
@@ -93,6 +93,16 @@ angular.module('eigenmusik')
 
     $scope.logout = function() {
         $rootScope.$emit('logout');
+    };
+
+    $scope.playIcon = function() {
+        if ($scope.loadingTrack) {
+            return 'spin glyphicon-refresh';
+        } else if ($scope.currentTrack && $scope.currentTrack.isPlaying()) {
+            return 'glyphicon-pause';
+        } else {
+            return 'glyphicon-play';
+        }
     };
 
     $rootScope.$on('login', function() {
