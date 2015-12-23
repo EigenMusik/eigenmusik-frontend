@@ -10,6 +10,7 @@
 angular.module('eigenmusik')
 .directive('playBar', function() {
   return {
-    templateUrl: 'partials/playbar.html'
+    templateUrl: 'partials/playbar.html',
+    require: '^player'
   };
 });

@@ -11,5 +11,6 @@ angular.module('eigenmusik')
 .directive('tracksTable', function() {
   return {
     templateUrl: 'partials/usertracks.html',
+    require: '^player'
   };
 });
