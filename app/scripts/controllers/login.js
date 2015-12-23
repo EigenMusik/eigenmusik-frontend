@@ -26,10 +26,19 @@ angular.module('eigenmusik')
                 $rootScope.$emit('login');
                 $rootScope.checkUser();
                 $scope.loggingIn = false;
-            }, function() {
+            }, function(response) {
+                switch (response) {
+                    case -1:
+                        $scope.alert = 'Couldn\'t connect to server.';
+                        break;
+                    case 400:
+                        $scope.alert = 'Incorrect username or password.';
+                        break;
+                    default:
+                        $scope.alert = "Unknown error occurred :("
+                }
                 // Delete faulty token.
                 TokenStore.delete();
-                $scope.alert = 'Incorrect username or password.';
                 $scope.loggingIn = false;
             }
         );
