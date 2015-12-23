@@ -18,21 +18,18 @@ angular.module('eigenmusik')
 
     var TRACK_RESTART_THRESHOLD = 5;
 
-    $scope.prev = function(force) {
-        if ($scope.currentTrack === null) {
-            return;
-        } else if (($scope.currentTrack.getCurrentTime() < TRACK_RESTART_THRESHOLD && !force) || $scope.currentTrackNumber === 0) {
+    $scope.prev = function() {
+        if ($scope.currentTrack !== null && $scope.currentTrack.getCurrentTime() > TRACK_RESTART_THRESHOLD) {
             $scope.currentTrack.restart();
-        } else {
+        } else if ($scope.currentTrackNumber !== null && $scope.currentTrackNumber !== 0) {
             $scope.play($scope.currentTrackNumber - 1);
         }
     };
 
     $scope.next = function() {
-        if ($scope.currentTrack === null || $scope.tracks.length === $scope.currentTrackNumber + 1) {
-            return;
+        if ($scope.currentTrackNumber !== null && $scope.tracks.length !== $scope.currentTrackNumber + 1) {
+            $scope.play($scope.currentTrackNumber + 1);
         }
-        $scope.play($scope.currentTrackNumber + 1);
     };
 
     $scope.trackClass = function(index) {
@@ -42,7 +39,9 @@ angular.module('eigenmusik')
     };
 
     $scope.playPause = function() {
-        if ($scope.currentTrack) {
+        if ($scope.loadingTrack) {
+            return;
+        } else if ($scope.currentTrack) {
             if (!$scope.currentTrack.isPlaying()){
                 $scope.currentTrack.play();
             } else {
@@ -54,25 +53,22 @@ angular.module('eigenmusik')
     };
 
     $scope.play = function(trackNumber) {
-        if ($scope.loadingTrack) {
-            return;
-        } else {
-            $scope.loadingTrack = true;
-        }
 
         var track = $scope.tracks[trackNumber];
 
         // If it's the current track, restart it.
         // If it's not, stop the stream so we can play the new one.
-        if (trackNumber === $scope.currentTrackNumber) {
-            return;
-        } else if ($scope.currentTrack !== null) {
+        if ($scope.currentTrack !== null) {
             $scope.stop();
         }
 
         $scope.currentTrackNumber = trackNumber;
 
+        $scope.loadingTrack = true;
         TrackFactory.build(track).then(function(currentTrack) {
+            if ($scope.currentTrackNumber !== trackNumber) {
+                return;
+            }
             currentTrack.onFinish(function() {
                 $scope.next();
             });
@@ -116,5 +112,8 @@ angular.module('eigenmusik')
 
     $rootScope.$on('logout', function() {
         $scope.stop();
+        $scope.currentTrack = null;
+        $scope.loadingTrack = false;
+        $scope.currentTrackNumber = null;
     });
 });

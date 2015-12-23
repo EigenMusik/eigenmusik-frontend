@@ -13,24 +13,23 @@ angular.module('eigenmusik')
     $rootScope.checkUser = function() {
         if (TokenStore.get()) {
             API.getMe().then(function() {
-                $scope.$emit('login');
-            }, function(err) {
-                $scope.$emit('logout');
-                console.log(err);
+                $rootScope.$emit('login');
+            }, function() {
+                $rootScope.$emit('logout');
             });
         } else {
-            $scope.showlogin = true;
+            $scope.showLogin = true;
         }
     };
 
     $rootScope.$on('login', function() {
-        $scope.showplayer = true;
-        $scope.showlogin = false;
+        $scope.showPlayer = true;
+        $scope.showLogin = false;
     });
 
     $rootScope.$on('logout', function() {
-        $scope.showplayer = false;
-        $scope.showlogin = true;
+        $scope.showPlayer = false;
+        $scope.showLogin = true;
         TokenStore.delete();
     });
 
