@@ -13,7 +13,7 @@ angular.module('eigenmusik')
     $scope.user = null;
     $scope.tracks = null;
     $scope.currentTrack = null;
-    $scope.loadingTrack = false;
+    $scope.loading = false;
     $scope.currentTrackNumber = null;
 
     var TRACK_RESTART_THRESHOLD = 5;
@@ -39,7 +39,7 @@ angular.module('eigenmusik')
     };
 
     $scope.playPause = function() {
-        if ($scope.loadingTrack) {
+        if ($scope.loading) {
             return;
         } else if ($scope.currentTrack) {
             if (!$scope.currentTrack.isPlaying()){
@@ -64,7 +64,7 @@ angular.module('eigenmusik')
 
         $scope.currentTrackNumber = trackNumber;
 
-        $scope.loadingTrack = true;
+        $scope.loading = true;
         TrackFactory.build(track).then(function(currentTrack) {
             if ($scope.currentTrackNumber !== trackNumber) {
                 return;
@@ -74,7 +74,7 @@ angular.module('eigenmusik')
             });
             currentTrack.play();
             $scope.currentTrack = currentTrack;
-            $scope.loadingTrack = false;
+            $scope.loading = false;
             $scope.$apply();
         });
     };
@@ -92,9 +92,7 @@ angular.module('eigenmusik')
     };
 
     $scope.playIcon = function() {
-        if ($scope.loadingTrack) {
-            return 'spin glyphicon-refresh';
-        } else if ($scope.currentTrack && $scope.currentTrack.isPlaying()) {
+        if ($scope.currentTrack && $scope.currentTrack.isPlaying()) {
             return 'glyphicon-pause';
         } else {
             return 'glyphicon-play';
@@ -113,7 +111,7 @@ angular.module('eigenmusik')
     $rootScope.$on('logout', function() {
         $scope.stop();
         $scope.currentTrack = null;
-        $scope.loadingTrack = false;
+        $scope.loading = false;
         $scope.currentTrackNumber = null;
     });
 });

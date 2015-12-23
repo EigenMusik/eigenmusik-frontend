@@ -20,6 +20,8 @@ describe('Controller: LoginController', function () {
                       return $q.reject(400);
                   case 'userWithBadConnection':
                       return $q.reject(-1);
+                  case 'aDodgyUser':
+                      return $q.reject(666);
                   case 'aCorrectUser':
                       return $q.resolve({
                           access_token: 'XXX'
@@ -59,4 +61,10 @@ describe('Controller: LoginController', function () {
       expect(TokenStore.get()).toEqual('XXX');
   });
 
+  it('should alert if there\'s an unknown error', function() {
+      scope.username = 'aDodgyUser';
+      scope.login();
+      $rootScope.$apply();
+      expect(scope.alert).toEqual('Unknown error occurred :(');
+  });
 });
