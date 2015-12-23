@@ -8,7 +8,7 @@
  * Login controller of EigenMusik
  */
 angular.module('eigenmusik')
-  .controller('LoginController', function(API, $rootScope, $scope, $http, TokenService, TokenStore) {
+  .controller('LoginController', function($rootScope, $scope, TokenService, TokenStore) {
 
     // TODO, remove this comment
     $scope.username = 'user0';
@@ -35,7 +35,7 @@ angular.module('eigenmusik')
                         $scope.alert = 'Incorrect username or password.';
                         break;
                     default:
-                        $scope.alert = "Unknown error occurred :("
+                        $scope.alert = "Unknown error occurred :(";
                 }
                 // Delete faulty token.
                 TokenStore.delete();
