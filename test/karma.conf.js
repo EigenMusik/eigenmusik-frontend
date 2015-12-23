@@ -60,7 +60,8 @@ module.exports = function(config) {
     // Which plugins to enable
     plugins: [
       "karma-phantomjs-launcher",
-      "karma-jasmine"
+      "karma-jasmine",
+      "karma-coverage" // required for coverage
     ],
 
     // Continuous Integration mode
@@ -79,5 +80,15 @@ module.exports = function(config) {
     // },
     // URL root prevent conflicts with the site root
     // urlRoot: '_karma_'
+
+    // Code coverage report
+    reporters: ['progress', 'coverage'],
+    preprocessors: {
+      'app/scripts/**/*.js': ['coverage']
+    },
+    coverageReporter: {
+      type: 'html',
+      dir: 'coverage'
+    },
   });
 };

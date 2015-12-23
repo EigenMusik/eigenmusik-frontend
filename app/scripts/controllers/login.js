@@ -8,16 +8,16 @@
  * Login controller of EigenMusik
  */
 angular.module('eigenmusik')
-  .controller('LoginController', function(API, $rootScope, $scope, $http, TokenService, TokenStore) {
+  .controller('LoginController', function($rootScope, $scope, TokenService, TokenStore) {
 
-    // TODO, remove this comment
+    // TODO, remove these defaults.
     $scope.username = 'user0';
     $scope.password = '123450';
     $scope.alert = null;
-    $scope.loggingIn = false;
+    $scope.loading = false;
 
     $scope.login = function() {
-        $scope.loggingIn = true;
+        $scope.loading = true;
         TokenService
             .login($scope.username, $scope.password)
             .then(function(data) {
@@ -25,22 +25,22 @@ angular.module('eigenmusik')
                 TokenStore.set(data.access_token); //jscs:disable
                 $rootScope.$emit('login');
                 $rootScope.checkUser();
-                $scope.loggingIn = false;
-            }, function() {
+                $scope.loading = false;
+            }, function(response) {
+                switch (response) {
+                    case -1:
+                        $scope.alert = 'Couldn\'t connect to server.';
+                        break;
+                    case 400:
+                        $scope.alert = 'Incorrect username or password.';
+                        break;
+                    default:
+                        $scope.alert = "Unknown error occurred :(";
+                }
                 // Delete faulty token.
                 TokenStore.delete();
-                $scope.alert = 'Incorrect username or password.';
-                $scope.loggingIn = false;
+                $scope.loading = false;
             }
         );
-    };
-
-    // TODO directivise me!
-    $scope.loginButton = function() {
-        if ($scope.loggingIn) {
-            return '<span class="glyphicon spin glyphicon-refresh" aria-hidden="true"></span>';
-        } else {
-            return 'Login';
-        }
     };
 });

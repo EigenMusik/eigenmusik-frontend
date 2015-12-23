@@ -65,9 +65,7 @@ angular.module('eigenmusik')
             function(player) {
                 return $http.get(player.options.streamUrlsEndpoint).then(
                     function(result) {
-                        // jscs:disable
                         return new SoundcloudTrack(track, new Audio(result.data.http_mp3_128_url));
-                        // jscs:enable
                     }
                 );
             }
