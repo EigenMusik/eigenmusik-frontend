@@ -8,9 +8,9 @@
  * Directive for the login form.
  */
 angular.module('eigenmusik')
-.directive('login', function() {
-  return {
-    templateUrl: 'partials/login.html',
-    controller: 'LoginController'
-  };
-});
+  .directive('login', function() {
+    return {
+      templateUrl: 'partials/login.html',
+      controller: 'LoginController'
+    };
+  });

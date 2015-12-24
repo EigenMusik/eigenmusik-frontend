@@ -8,39 +8,36 @@
  * Login controller of EigenMusik
  */
 angular.module('eigenmusik')
-  .controller('LoginController', function($rootScope, $scope, TokenService, TokenStore) {
+  .controller('LoginController', function($rootScope, $scope, TokenService, TokenStore, $location) {
 
-    // TODO, remove these defaults.
-    $scope.username = 'user0';
-    $scope.password = '123450';
     $scope.alert = null;
     $scope.loading = false;
 
     $scope.login = function() {
-        $scope.loading = true;
-        TokenService
-            .login($scope.username, $scope.password)
-            .then(function(data) {
-                $scope.alert = null;
-                TokenStore.set(data.access_token); //jscs:disable
-                $rootScope.$emit('login');
-                $rootScope.checkUser();
-                $scope.loading = false;
-            }, function(response) {
-                switch (response) {
-                    case -1:
-                        $scope.alert = 'Couldn\'t connect to server.';
-                        break;
-                    case 400:
-                        $scope.alert = 'Incorrect username or password.';
-                        break;
-                    default:
-                        $scope.alert = "Unknown error occurred :(";
-                }
-                // Delete faulty token.
-                TokenStore.delete();
-                $scope.loading = false;
-            }
-        );
+      $scope.loading = true;
+      // Remove any old token.
+      TokenStore.delete();
+      TokenService
+        .login($scope.username, $scope.password)
+        .then(function(data) {
+          $scope.alert = null;
+          $scope.loading = false;
+          TokenStore.set(data.access_token); //jscs:disable
+          $location.path('/player');
+        }, function(response) {
+          switch (response) {
+            case -1:
+              $scope.alert = 'Couldn\'t connect to server.';
+              break;
+            case 400:
+              $scope.alert = 'Incorrect username or password.';
+              break;
+            default:
+              $scope.alert = "Unknown error occurred :(";
+          }
+          // Delete faulty token.
+          TokenStore.delete();
+          $scope.loading = false;
+        });
     };
-});
+  });

@@ -8,9 +8,9 @@
  * Directive for the web player.
  */
 angular.module('eigenmusik')
-.directive('player', function() {
-  return {
-    templateUrl: 'partials/player.html',
-    controller: 'PlayerController'
-  };
-});
+  .directive('player', function() {
+    return {
+      templateUrl: 'partials/player.html',
+      controller: 'PlayerController'
+    };
+  });

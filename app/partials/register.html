@@ -1,0 +1,11 @@
+<div class="wrapper">
+    <form class="form-register" ng-submit="register()">
+        <h2 class="form-register-heading">EigenMusik</h2>
+        <input type="text" class="form-control" ng-model="username" placeholder="Username" required="" autofocus="" />
+        <input type="password" class="form-control" ng-model="password" placeholder="Password" required=""/>
+        <input type="password" class="form-control" ng-model="passwordConfirmation" placeholder="Password (again)" required=""/>
+        <input type="email" class="form-control" ng-model="email" placeholder="Email" required="" autofocus="" />
+        <button class="btn btn-lg btn-primary btn-block" type="submit" loading-button>Register</button>
+        <div ng-show="alert" class="alert alert-danger text-center" role="alert">{{alert}}</div>
+    </form>
+</div>

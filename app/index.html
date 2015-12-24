@@ -15,14 +15,14 @@
     <link rel="stylesheet" href="styles/main.css">
     <!-- endbuild -->
   </head>
-  <body ng-controller="AppController" ng-cloak>
+  <body ng-cloak>
+    <div class="container-fluid">
+      <ng-view></ng-view>
+    </div>
     <!--[if lte IE 8]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
-    <div class="container-fluid">
-      <player ng-show="showPlayer" ng-cloak></player>
-      <login ng-show="showLogin" ng-cloak></login>
-    </div>
+
     <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
     <script>
        !function(A,n,g,u,l,a,r){A.GoogleAnalyticsObject=l,A[l]=A[l]||function(){
@@ -53,9 +53,9 @@
 
     <!-- build:js({.tmp,app}) scripts/scripts.js -->
     <script src="scripts/app.js"></script>
-    <script src="scripts/controllers/app.js"></script>
     <script src="scripts/controllers/player.js"></script>
     <script src="scripts/controllers/login.js"></script>
+    <script src="scripts/controllers/register.js"></script>
     <script src="scripts/services/token.js"></script>
     <script src="scripts/services/api.js"></script>
     <script src="scripts/factories/soundcloudTrack.js"></script>

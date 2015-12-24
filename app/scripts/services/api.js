@@ -9,35 +9,50 @@
  * API for eigenmusik.
  */
 angular.module('eigenmusik')
-.provider('API', function () {
+  .provider('API', function() {
 
     var apiUrl = 'http://localhost:7070';
     this.setApiUrl = function(url) {
-        apiUrl = url;
+      apiUrl = url;
     };
 
     this.$get = function($q, $http) {
-        return {
-            getMe: function() {
-                var ret = $q.defer();
-                $http.get(REST_API + '/rest/auth/me')
-                    .success(function(r) {
-                        ret.resolve(r);
-                }).error(function(err) {
-                        ret.reject(err);
-                });
-                return ret.promise;
-            },
-            getTracks: function() {
-                var ret = $q.defer();
-                $http.get(apiUrl + '/rest/tracks')
-                    .success(function(r) {
-                        ret.resolve(r);
-                }).error(function(err) {
-                    ret.reject(err);
-                });
-                return ret.promise;
-            }
-        };
+      return {
+        register: function(userData) {
+          var ret = $q.defer();
+          $http({
+              url: REST_API + '/auth/register',
+              method: 'POST',
+              data: userData,
+              transformResponse: undefined
+            })
+            .success(function(r) {
+              ret.resolve(r);
+            }).error(function(err) {
+              ret.reject(err);
+            });
+          return ret.promise;
+        },
+        getMe: function() {
+          var ret = $q.defer();
+          $http.get(REST_API + '/auth/me')
+            .success(function(r) {
+              ret.resolve(r);
+            }).error(function(err) {
+              ret.reject(err);
+            });
+          return ret.promise;
+        },
+        getTracks: function() {
+          var ret = $q.defer();
+          $http.get(apiUrl + '/rest/tracks')
+            .success(function(r) {
+              ret.resolve(r);
+            }).error(function(err) {
+              ret.reject(err);
+            });
+          return ret.promise;
+        }
+      };
     };
-});
+  });

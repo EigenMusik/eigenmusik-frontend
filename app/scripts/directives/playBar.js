@@ -8,9 +8,9 @@
  * Directive for the playbar appearing at the top of the player.
  */
 angular.module('eigenmusik')
-.directive('playBar', function() {
-  return {
-    templateUrl: 'partials/playbar.html',
-    require: '^player'
-  };
-});
+  .directive('playBar', function() {
+    return {
+      templateUrl: 'partials/playbar.html',
+      require: '^player'
+    };
+  });

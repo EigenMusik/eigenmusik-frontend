@@ -1,31 +1,28 @@
 'use strict';
 
-describe('Controller: PlayerController', function () {
+describe('Controller: PlayerController', function() {
 
     var PlayerController, $rootScope, scope, mockTrackFactory, mockAPI;
 
-    var tracks = [
-        {
-            album: null,
-            artist: null,
-            createdBy: null,
-            createdOn: "2015-12-23T21:09:53.836+0000",
-            duration: 12345678,
-            name: "Sticky Fingers - How To Fly",
-            type: "SOUNDCLOUD",
-            uri: "109712283",
-        },
-        {
-            album: null,
-            artist: null,
-            createdBy: null,
-            createdOn: "2015-12-23T21:09:53.836+0000",
-            duration: 12345678,
-            name: "Sticky Fingers - How To Fly",
-            type: "SOUNDCLOUD",
-            uri: "109712283",
-        }
-    ];
+    var tracks = [{
+        album: null,
+        artist: null,
+        createdBy: null,
+        createdOn: '2015-12-23T21:09:53.836+0000',
+        duration: 12345678,
+        name: 'Sticky Fingers - How To Fly',
+        type: 'SOUNDCLOUD',
+        uri: '109712283',
+    }, {
+        album: null,
+        artist: null,
+        createdBy: null,
+        createdOn: '2015-12-23T21:09:53.836+0000',
+        duration: 12345678,
+        name: 'Sticky Fingers - How To Fly',
+        type: 'SOUNDCLOUD',
+        uri: '109712283',
+    }];
 
     var response = {
         content: tracks
@@ -33,7 +30,7 @@ describe('Controller: PlayerController', function () {
 
     beforeEach(module('eigenmusik'));
 
-    beforeEach(inject(function ($controller, _$rootScope_, $q) {
+    beforeEach(inject(function($controller, _$rootScope_, $q) {
         $rootScope = _$rootScope_;
 
         var mockTrack = {
@@ -52,14 +49,14 @@ describe('Controller: PlayerController', function () {
                 return $q.resolve(mockTrack);
             }
 
-        }
+        };
 
         mockAPI = {
             getMe: function() {
                 return $q.resolve({
-                   displayName: 'user0',
-                   gravatarUrl: null,
-                   reputation: 1295,
+                    displayName: 'user0',
+                    gravatarUrl: null,
+                    reputation: 1295,
                 });
             },
             getTracks: function() {
@@ -74,7 +71,7 @@ describe('Controller: PlayerController', function () {
             $rootScope: _$rootScope_,
             API: mockAPI,
             TrackFactory: mockTrackFactory
-        }); 
+        });
     }));
 
     it('should load user details and tracks on login', function() {
