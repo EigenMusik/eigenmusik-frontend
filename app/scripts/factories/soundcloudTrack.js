@@ -16,61 +16,61 @@ SC.initialize({
  * A playable track from soundcloud.
  */
 angular.module('eigenmusik')
-.factory('SoundcloudTrack', function ($http) {
+  .factory('SoundcloudTrack', function($http) {
 
     function SoundcloudTrack(track, audio) {
-        this.track = track;
-        this.audio = audio;
+      this.track = track;
+      this.audio = audio;
     }
 
     SoundcloudTrack.prototype.play = function() {
-        this.audio.play();
+      this.audio.play();
     };
 
     SoundcloudTrack.prototype.stop = function() {
-        this.audio.src = '';
-        this.audio.load();
+      this.audio.src = '';
+      this.audio.load();
     };
 
     SoundcloudTrack.prototype.pause = function() {
-        this.audio.pause();
+      this.audio.pause();
     };
 
     SoundcloudTrack.prototype.onFinish = function(callback) {
-        this.audio.addEventListener('ended', callback);
+      this.audio.addEventListener('ended', callback);
     };
 
     SoundcloudTrack.prototype.getArtist = function() {
-        return this.track.artist.name;
+      return this.track.artist.name;
     };
 
     SoundcloudTrack.prototype.getTitle = function() {
-        return this.track.name;
+      return this.track.name;
     };
 
     SoundcloudTrack.prototype.isPlaying = function() {
-        return !this.audio.paused;
+      return !this.audio.paused;
     };
 
     SoundcloudTrack.prototype.getCurrentTime = function() {
-        return this.audio.currentTime;
+      return this.audio.currentTime;
     };
 
     SoundcloudTrack.prototype.restart = function() {
-        this.audio.currentTime = 0;
+      this.audio.currentTime = 0;
     };
 
     SoundcloudTrack.build = function(track) {
-        return SC.stream('/tracks/' + track.uri).then(
-            function(player) {
-                return $http.get(player.options.streamUrlsEndpoint).then(
-                    function(result) {
-                        return new SoundcloudTrack(track, new Audio(result.data.http_mp3_128_url));
-                    }
-                );
+      return SC.stream('/tracks/' + track.uri).then(
+        function(player) {
+          return $http.get(player.options.streamUrlsEndpoint).then(
+            function(result) {
+              return new SoundcloudTrack(track, new Audio(result.data.http_mp3_128_url));
             }
-        );
+          );
+        }
+      );
     };
 
     return SoundcloudTrack;
-});
+  });

@@ -24,7 +24,7 @@ angular
 
     var prod;
     // Detect current environment.
-    switch( window.location.hostname ){
+    switch (window.location.hostname) {
       case 'localhost':
       case '127.0.0.1':
         prod = false;
@@ -34,7 +34,7 @@ angular
         prod = true;
         break;
       default:
-        throw('Unknown environment: ' + window.location.hostname );
+        throw ('Unknown environment: ' + window.location.hostname);
     }
 
     // Configure for the detected environment.
@@ -47,12 +47,35 @@ angular
     TokenServiceProvider.setClientDetails('web', 'secret');
     APIProvider.setApiUrl(REST_API);
 
-    $routeProvider.
-      when('/login', {
+    $routeProvider
+      .when('/login', {
         templateUrl: 'partials/login.html',
         controller: 'LoginController'
       })
+      .when('/register', {
+        templateUrl: 'partials/register.html',
+        controller: 'RegistrationController',
+      })
+      .when('/player', {
+        templateUrl: 'partials/player.html',
+        controller: 'PlayerController',
+        data: {
+          authorization: true
+        }
+      })
       .otherwise({
-        redirectTo: '/'
+        redirectTo: '/login'
+      });
+  })
+  // Lock down routes when token is not set.
+  .run(function(TokenStore, $rootScope, $location) {
+    $rootScope.$on('$routeChangeStart', function(next, current) {
+      if (!TokenStore.isSet() && current.data && current.data.authorization) {
+        $location.path('/login');
+      }
+    });
+    $rootScope.$on('logout', function() {
+      TokenStore.delete();
+      $location.path('/');
     });
   });

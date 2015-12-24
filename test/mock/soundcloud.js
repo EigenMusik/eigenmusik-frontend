@@ -1,7 +1,7 @@
 'use strict';
 
 var SC = {
-	initialize: function() {
+    initialize: function() {
 
-	}
+    }
 };
