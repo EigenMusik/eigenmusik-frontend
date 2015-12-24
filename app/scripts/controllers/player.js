@@ -19,9 +19,11 @@ angular.module('eigenmusik')
     var TRACK_RESTART_THRESHOLD = 5;
 
     $scope.prev = function() {
-        if (($scope.currentTrack !== null && $scope.currentTrack.getCurrentTime() > TRACK_RESTART_THRESHOLD) || $scope.currentTrackNumber === 0) {
+        if ($scope.currentTrack !== null && $scope.currentTrack.getCurrentTime() > TRACK_RESTART_THRESHOLD) {
             $scope.currentTrack.restart();
-        } else if ($scope.currentTrackNumber !== null) {
+        } else if ($scope.currentTrack !== null && $scope.currentTrackNumber === 0) {
+            $scope.currentTrack.restart();
+        } else if ($scope.currentTrackNumber !== 0 && $scope.currentTrackNumber !== null) {
             $scope.play($scope.currentTrackNumber - 1);
         }
     };
