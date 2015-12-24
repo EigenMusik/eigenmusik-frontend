@@ -18,9 +18,24 @@ angular.module('eigenmusik')
 
     this.$get = function($q, $http) {
       return {
+        register: function(userData) {
+          var ret = $q.defer();
+          $http({
+              url: REST_API + '/auth/register',
+              method: 'POST',
+              data: userData,
+              transformResponse: undefined
+            })
+            .success(function(r) {
+              ret.resolve(r);
+            }).error(function(err) {
+              ret.reject(err);
+            });
+          return ret.promise;
+        },
         getMe: function() {
           var ret = $q.defer();
-          $http.get(REST_API + '/rest/auth/me')
+          $http.get(REST_API + '/auth/me')
             .success(function(r) {
               ret.resolve(r);
             }).error(function(err) {

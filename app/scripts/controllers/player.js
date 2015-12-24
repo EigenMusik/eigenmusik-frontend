@@ -103,6 +103,8 @@ angular.module('eigenmusik')
 
     API.getMe().then(function(user) {
       $scope.user = user;
+    }, function() {
+      $rootScope.$emit('logout');
     });
     API.getTracks().then(function(r) {
       $scope.tracks = r.content;

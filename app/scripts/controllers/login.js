@@ -10,9 +10,6 @@
 angular.module('eigenmusik')
   .controller('LoginController', function($rootScope, $scope, TokenService, TokenStore, $location) {
 
-    // TODO, remove these defaults.
-    $scope.username = 'user0';
-    $scope.password = '123450';
     $scope.alert = null;
     $scope.loading = false;
 
