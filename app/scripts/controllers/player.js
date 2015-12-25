@@ -10,13 +10,18 @@
 angular.module('eigenmusik')
   .controller('PlayerController', function($scope, $rootScope, API, TrackFactory) {
 
-    $scope.user = null;
-    $scope.tracks = null;
-    $scope.currentTrack = null;
-    $scope.loading = false;
-    $scope.currentTrackNumber = null;
-
     var TRACK_RESTART_THRESHOLD = 5;
+
+    $scope.clear = function() {
+      if ($scope.currentTrack !== null && $scope.currentTrack !== undefined) {
+        $scope.currentTrack.stop();
+      }
+      $scope.user = null;
+      $scope.tracks = null;
+      $scope.currentTrack = null;
+      $scope.loading = false;
+      $scope.currentTrackNumber = null;
+    };
 
     $scope.prev = function() {
       if ($scope.currentTrack !== null && $scope.currentTrack.getCurrentTime() > TRACK_RESTART_THRESHOLD) {
@@ -90,6 +95,7 @@ angular.module('eigenmusik')
     };
 
     $scope.logout = function() {
+      $scope.clear();
       $rootScope.$emit('logout');
     };
 
@@ -100,6 +106,8 @@ angular.module('eigenmusik')
         return 'glyphicon-play';
       }
     };
+
+    $scope.clear();
 
     API.getMe().then(function(user) {
       $scope.user = user;

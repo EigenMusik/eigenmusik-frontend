@@ -12,6 +12,7 @@ angular.module('eigenmusik')
 
     $scope.alert = null;
     $scope.loading = false;
+    $scope.forgottenText = 'Forgotten username/password?';
 
     $scope.login = function() {
       $scope.loading = true;
