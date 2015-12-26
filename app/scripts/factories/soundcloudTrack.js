@@ -1,12 +1,6 @@
 'use strict';
 
-/* globals SC */
-
-// jscs:disable
-SC.initialize({
-  client_id: 'f434bba227f3c05662515accf6d287fc',
-});
-// jscs:enable
+/* globals SC, SC_CLIENT_ID */
 
 /**
  * @ngdoc function
@@ -17,6 +11,12 @@ SC.initialize({
  */
 angular.module('eigenmusik')
   .factory('SoundcloudTrack', function($http) {
+
+    // jscs:disable
+    SC.initialize({
+      client_id: SC_CLIENT_ID,
+    });
+    // jscs:enable
 
     function SoundcloudTrack(track, audio) {
       this.track = track;
