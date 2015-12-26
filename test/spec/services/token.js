@@ -13,6 +13,11 @@ describe('Service: TokenService', function() {
         TokenServiceProvider.setTokenUrl(oauthEndpoint);
     });
 
+    // Ignore the initial template GET request with ui-router.
+    beforeEach(module(function($urlRouterProvider) {
+        $urlRouterProvider.deferIntercept();
+    }));
+
     beforeEach(inject(function(_TokenService_, _TokenStore_, _$rootScope_, _$httpBackend_, _$http_) {
         TokenService = _TokenService_;
         TokenStore = _TokenStore_;

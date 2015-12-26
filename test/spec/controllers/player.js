@@ -2,7 +2,7 @@
 
 describe('Controller: PlayerController', function() {
 
-    var PlayerController, $rootScope, scope, mockTrackFactory, mockAPI;
+    var PlayerController, $rootScope, scope, mockTrackFactory, mockAPI, $httpBackend;
 
     var tracks = [{
         album: null,
@@ -30,8 +30,14 @@ describe('Controller: PlayerController', function() {
 
     beforeEach(module('eigenmusik'));
 
-    beforeEach(inject(function($controller, _$rootScope_, $q) {
+    // Ignore the initial template GET request with ui-router.
+    beforeEach(module(function($urlRouterProvider) {
+        $urlRouterProvider.deferIntercept();
+    }));
+
+    beforeEach(inject(function($controller, _$rootScope_, $q, _$httpBackend_) {
         $rootScope = _$rootScope_;
+        $httpBackend = _$httpBackend_;
 
         var mockTrack = {
             onFinish: function() {
@@ -73,6 +79,10 @@ describe('Controller: PlayerController', function() {
             TrackFactory: mockTrackFactory
         });
     }));
+
+    beforeEach(function() {
+        $httpBackend.expectGET("partials/player.html").respond("<div>mock template</div>");;
+    });
 
     it('should load user details and tracks on login', function() {
         $rootScope.$emit('login');

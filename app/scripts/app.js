@@ -18,9 +18,10 @@ angular
     'ngResource',
     'ngRoute',
     'ngSanitize',
-    'ngTouch'
+    'ngTouch',
+    'ui.router'
   ])
-  .config(function($routeProvider, TokenServiceProvider, APIProvider) {
+  .config(function($urlRouterProvider, $stateProvider, TokenServiceProvider, APIProvider) {
 
     var prod;
     // Detect current environment.
@@ -47,35 +48,46 @@ angular
     TokenServiceProvider.setClientDetails('web', 'secret');
     APIProvider.setApiUrl(REST_API);
 
-    $routeProvider
-      .when('/login', {
+    $urlRouterProvider.otherwise('/login');
+
+    $stateProvider
+      .state('login', {
+        url: '/login',
         templateUrl: 'partials/login.html',
         controller: 'LoginController'
       })
-      .when('/register', {
+      .state('register', {
+        url: '/register',
         templateUrl: 'partials/register.html',
         controller: 'RegistrationController',
       })
-      .when('/player', {
+      .state('player', {
+        url: '/player',
         templateUrl: 'partials/player.html',
         controller: 'PlayerController',
         data: {
           authorization: true
         }
       })
-      .otherwise({
-        redirectTo: '/login'
+      .state('player.sources', {
+        url: '/sources',
+        templateUrl: 'partials/sources.html',
+      })
+      .state('player.tracks', {
+        url: '/tracks',
+        templateUrl: 'partials/tracks.html',
       });
+
   })
   // Lock down routes when token is not set.
-  .run(function(TokenStore, $rootScope, $location) {
-    $rootScope.$on('$routeChangeStart', function(next, current) {
-      if (!TokenStore.isSet() && current.data && current.data.authorization) {
-        $location.path('/login');
+  .run(function(TokenStore, $rootScope, $state) {
+    $rootScope.$on('$stateChangeSuccess', function(event, toState) {
+      if (!TokenStore.isSet() && toState.data && toState.data.authorization) {
+        $state.go('login');
       }
     });
     $rootScope.$on('logout', function() {
       TokenStore.delete();
-      $location.path('/');
+      $state.go('login');
     });
   });
