@@ -8,7 +8,7 @@
  * Login controller of EigenMusik
  */
 angular.module('eigenmusik')
-  .controller('RegistrationController', function($scope, API, $location) {
+  .controller('RegistrationController', function($scope, API, $state) {
     $scope.loading = false;
     $scope.alert = null;
 
@@ -21,7 +21,7 @@ angular.module('eigenmusik')
       }).then(function(user) {
         $scope.user = user;
         $scope.loading = false;
-        $location.path('/login');
+        $state.go('login');
 
       }, function(err) {
         $scope.loading = false;

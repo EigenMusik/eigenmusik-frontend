@@ -8,7 +8,7 @@
  * Login controller of EigenMusik
  */
 angular.module('eigenmusik')
-  .controller('LoginController', function($rootScope, $scope, TokenService, TokenStore, $location) {
+  .controller('LoginController', function($rootScope, $scope, TokenService, TokenStore, $state) {
 
     $scope.alert = null;
     $scope.loading = false;
@@ -24,7 +24,7 @@ angular.module('eigenmusik')
           $scope.alert = null;
           $scope.loading = false;
           TokenStore.set(data.access_token); //jscs:disable
-          $location.path('/player');
+          $state.go('player');
         }, function(response) {
           switch (response) {
             case -1:

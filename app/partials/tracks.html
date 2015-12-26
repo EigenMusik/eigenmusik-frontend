@@ -1,5 +1,5 @@
 <resizable-table ng-style="wrapperStyle()" id="tracks-wrapper">
-    <table id="tracks-table" class="table table-fixedheader">
+    <table id="tracks-table" class="table table-fixedheader" ng-hide="tracksAreEmpty()">
         <thead>
             <tr>
                 <th>TRACK</th>
@@ -27,4 +27,7 @@
             </tr>
         </tbody>
     </table>
-</div>
+    <div ng-show="tracksAreEmpty()">
+        <h5 class="text-center">You haven't got any tracks connected. Let's add a <a ui-sref="player.sources">new source</a>!</h5>
+    </div>
+</resizable-table>

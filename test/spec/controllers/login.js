@@ -2,13 +2,19 @@
 
 describe('Controller: LoginController', function() {
 
-    var LoginController, $rootScope, scope, mockTokenService, TokenStore;
+    var LoginController, $rootScope, scope, mockTokenService, TokenStore, $httpBackend, $state;
 
     beforeEach(module('eigenmusik'));
 
-    beforeEach(inject(function($controller, _$rootScope_, $q, _TokenStore_) {
+    // Ignore the initial template GET request with ui-router.
+    beforeEach(module(function($urlRouterProvider) {
+        $urlRouterProvider.deferIntercept();
+    }));
+
+    beforeEach(inject(function($controller, _$rootScope_, $q, _TokenStore_, _$httpBackend_) {
         $rootScope = _$rootScope_;
         TokenStore = _TokenStore_;
+        $httpBackend = _$httpBackend_;
 
         $rootScope.checkUser = function() {};
 
@@ -54,6 +60,7 @@ describe('Controller: LoginController', function() {
     });
 
     it('should get an access token for a correct user', function() {
+        $httpBackend.expectGET("partials/player.html").respond("<div>mock template</div>");
         scope.username = 'aCorrectUser';
         scope.login();
         $rootScope.$apply();
