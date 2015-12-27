@@ -4,6 +4,7 @@
 var REST_API;
 var SC_CLIENT_ID;
 var SC;
+var SELF_URL;
 
 /**
  * @ngdoc overview
@@ -44,9 +45,12 @@ angular
     if (prod) {
       REST_API = 'http://eigenmusik-backend.herokuapp.com';
       SC_CLIENT_ID = 'f434bba227f3c05662515accf6d287fc';
+      SELF_URL = 'http://www.eigenmusik.com';
+
     } else {
       REST_API = 'http://localhost:7070';
       SC_CLIENT_ID = '184ffc1f8e74dcb4aba252c10235a121';
+      SELF_URL = 'http://localhost:9000';
     }
 
     // jscs:disable
