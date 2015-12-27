@@ -63,7 +63,7 @@ angular
     TokenServiceProvider.setClientDetails('web', 'secret');
     APIProvider.setApiUrl(REST_API);
 
-    $urlRouterProvider.otherwise('/login');
+    $urlRouterProvider.otherwise('/player/tracks');
 
     $stateProvider
       .state('login', {
