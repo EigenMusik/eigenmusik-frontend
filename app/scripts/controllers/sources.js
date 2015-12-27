@@ -1,6 +1,6 @@
 'use strict';
 
-/* globals SC_CLIENT_ID */
+/* globals SC_CLIENT_ID, SELF_URL */
 
 /**
  * @ngdoc function
@@ -15,7 +15,7 @@ angular.module('eigenmusik')
     $scope.soundcloudAuthentication = function() {
 
       var childWindow;
-      var redirect_uri = $location.protocol() + '://' + $location.host() + ':' + $location.port() + '/callbacks/soundcloud.html';
+      var redirect_uri = SELF_URL + '/callbacks/soundcloud.html';
       var authUrl = 'https://soundcloud.com/connect?client_id=' + SC_CLIENT_ID + '&response_type=code&redirect_uri=' + redirect_uri;
       $window.parentCallback = function(code) {
         // Process authentication code from child window and authenticate with backend.
