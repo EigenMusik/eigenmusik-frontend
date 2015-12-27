@@ -23,7 +23,7 @@ angular.module('eigenmusik')
         .then(function(data) {
           $scope.alert = null;
           $scope.loading = false;
-          TokenStore.set(data.access_token); //jscs:disable
+          TokenStore.set(data.access_token);
           $state.go('player');
         }, function(response) {
           switch (response) {
@@ -34,7 +34,7 @@ angular.module('eigenmusik')
               $scope.alert = 'Incorrect username or password.';
               break;
             default:
-              $scope.alert = "Unknown error occurred :(";
+              $scope.alert = 'Unknown error occurred :(';
           }
           // Delete faulty token.
           TokenStore.delete();

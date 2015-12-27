@@ -2,6 +2,8 @@
 
 // Globals configuration.
 var REST_API;
+var SC_CLIENT_ID;
+var SC;
 
 /**
  * @ngdoc overview
@@ -41,9 +43,18 @@ angular
     // Configure for the detected environment.
     if (prod) {
       REST_API = 'http://eigenmusik-backend.herokuapp.com';
+      SC_CLIENT_ID = 'f434bba227f3c05662515accf6d287fc';
     } else {
       REST_API = 'http://localhost:7070';
+      SC_CLIENT_ID = '184ffc1f8e74dcb4aba252c10235a121';
     }
+
+    // jscs:disable
+    SC.initialize({
+      client_id: SC_CLIENT_ID,
+    });
+    // jscs:enable
+
     TokenServiceProvider.setTokenUrl(REST_API + '/oauth/token');
     TokenServiceProvider.setClientDetails('web', 'secret');
     APIProvider.setApiUrl(REST_API);
@@ -72,6 +83,7 @@ angular
       .state('player.sources', {
         url: '/sources',
         templateUrl: 'partials/sources.html',
+        controller: 'SourcesController',
       })
       .state('player.tracks', {
         url: '/tracks',

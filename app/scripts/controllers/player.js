@@ -61,15 +61,15 @@ angular.module('eigenmusik')
     };
 
     $scope.tracksAreEmpty = function() {
-        if ($scope.tracks === undefined || $scope.tracks === null || $scope.tracks.length === 0) {
-            return true;
-        }
-        return false;
+      if ($scope.tracks === undefined || $scope.tracks === null || $scope.tracks.length === 0) {
+        return true;
+      }
+      return false;
     };
 
     $scope.play = function(trackNumber) {
-      if($scope.tracksAreEmpty()) {
-          return;
+      if ($scope.tracksAreEmpty()) {
+        return;
       }
 
       var track = $scope.tracks[trackNumber];

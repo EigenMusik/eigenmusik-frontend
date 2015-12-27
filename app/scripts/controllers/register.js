@@ -18,11 +18,9 @@ angular.module('eigenmusik')
         name: $scope.username,
         password: $scope.password,
         email: $scope.email
-      }).then(function(user) {
-        $scope.user = user;
+      }).then(function() {
         $scope.loading = false;
         $state.go('login');
-
       }, function(err) {
         $scope.loading = false;
         $scope.alert = err;

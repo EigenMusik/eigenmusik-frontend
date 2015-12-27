@@ -2,7 +2,7 @@
 
 describe('Controller: LoginController', function() {
 
-    var LoginController, $rootScope, scope, mockTokenService, TokenStore, $httpBackend, $state;
+    var LoginController, $rootScope, scope, mockTokenService, TokenStore, $httpBackend;
 
     beforeEach(module('eigenmusik'));
 
@@ -60,7 +60,7 @@ describe('Controller: LoginController', function() {
     });
 
     it('should get an access token for a correct user', function() {
-        $httpBackend.expectGET("partials/player.html").respond("<div>mock template</div>");
+        $httpBackend.expectGET('partials/player.html').respond('<div>mock template</div>');
         scope.username = 'aCorrectUser';
         scope.login();
         $rootScope.$apply();

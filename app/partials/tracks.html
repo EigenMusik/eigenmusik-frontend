@@ -1,33 +1,31 @@
-<resizable-table ng-style="wrapperStyle()" id="tracks-wrapper">
-    <table id="tracks-table" class="table table-fixedheader" ng-hide="tracksAreEmpty()">
-        <thead>
-            <tr>
-                <th>TRACK</th>
-                <th>ARTIST</th>
-                <th>TIME</th>
-                <th>ALBUM</th>
-                <th>ADDED</th>
-            </tr>
-        </thead>
-        <tbody ng-style="tbodyStyle()">
-            <tr ng-repeat="t in tracks" ng-click="play($index)" ng-class="trackClass($index)">
-                <td>
-                    <a>{{t.name}}</a>
-                </td>
-                <td>
-                    <a>{{t.artist.name}}</a>
-                </td>
-                <td>{{t.duration | displaytime}}</td>
-                <td>
-                    <a>{{t.album.name}}</a>
-                </td>
-                <td>
-                    {{t.createdOn | timeago}}
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <div ng-show="tracksAreEmpty()">
-        <h5 class="text-center">You haven't got any tracks connected. Let's add a <a ui-sref="player.sources">new source</a>!</h5>
-    </div>
-</resizable-table>
+<table id="tracks-table" class="table table-fixedheader" ng-hide="tracksAreEmpty()">
+    <thead>
+        <tr>
+            <th>TRACK</th>
+            <th>ARTIST</th>
+            <th>TIME</th>
+            <th>ALBUM</th>
+            <th>ADDED</th>
+        </tr>
+    </thead>
+    <tbody ng-style="tbodyStyle()">
+        <tr ng-repeat="t in tracks" ng-click="play($index)" ng-class="trackClass($index)">
+            <td>
+                <a>{{t.name}}</a>
+            </td>
+            <td>
+                <a>{{t.artist.name}}</a>
+            </td>
+            <td>{{t.duration | displaytime}}</td>
+            <td>
+                <a>{{t.album.name}}</a>
+            </td>
+            <td>
+                {{t.createdOn | timeago}}
+            </td>
+        </tr>
+    </tbody>
+</table>
+<div ng-show="tracksAreEmpty()">
+    <h5 class="text-center">You haven't got any tracks connected. Let's add a <a ui-sref="player.sources">new source</a>!</h5>
+</div>

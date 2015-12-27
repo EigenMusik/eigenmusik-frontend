@@ -81,7 +81,7 @@ describe('Controller: PlayerController', function() {
     }));
 
     beforeEach(function() {
-        $httpBackend.expectGET("partials/player.html").respond("<div>mock template</div>");;
+        $httpBackend.expectGET('partials/player.html').respond('<div>mock template</div>');
     });
 
     it('should load user details and tracks on login', function() {
@@ -119,6 +119,13 @@ describe('Controller: PlayerController', function() {
         $rootScope.$apply();
         scope.play(0);
         scope.prev();
+        expect(scope.currentTrackNumber).toEqual(0);
+    });
+
+    it('should play first track', function() {
+        $rootScope.$emit('login');
+        $rootScope.$apply();
+        scope.playPause();
         expect(scope.currentTrackNumber).toEqual(0);
     });
 });
