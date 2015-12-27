@@ -61,7 +61,7 @@ angular.module('eigenmusik')
             }).error(function(err) {
               ret.reject(err);
             });
-          return;
+          return ret.promise;
         }
       };
     };
