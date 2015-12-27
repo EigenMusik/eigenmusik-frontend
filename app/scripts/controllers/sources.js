@@ -15,7 +15,8 @@ angular.module('eigenmusik')
     $scope.soundcloudAuthentication = function() {
 
       var childWindow;
-      var redirect_uri = SELF_URL + '/callbacks/soundcloud.html';
+      // Redirecting to a standalone template because soundcloud doesn't like push state callbacks.
+      var redirect_uri = SELF_URL + '/soundcloudCallback.html';
       var authUrl = 'https://soundcloud.com/connect?client_id=' + SC_CLIENT_ID + '&response_type=code&redirect_uri=' + redirect_uri;
       $window.parentCallback = function(code) {
         // Process authentication code from child window and authenticate with backend.
