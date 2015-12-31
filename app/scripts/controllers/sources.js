@@ -19,10 +19,10 @@ angular.module('eigenmusik')
       var redirect_uri = SELF_URL + '/soundcloudCallback.html';
       var authUrl = 'https://soundcloud.com/connect?client_id=' + SC_CLIENT_ID + '&response_type=code&redirect_uri=' + redirect_uri;
       $window.parentCallback = function(code) {
-        // Process authentication code from child window and authenticate with backend.
+        // Process authentication code from child window gand authenticate with backend.
         API.addSoundcloudAccount(code).then(
             function() {
-                $state.go('player', null, {
+                $state.go('player.tracks', null, {
                     reload: true
                 });
                 childWindow.close();

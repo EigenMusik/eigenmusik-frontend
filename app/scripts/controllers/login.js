@@ -24,7 +24,7 @@ angular.module('eigenmusik')
           $scope.alert = null;
           $scope.loading = false;
           TokenStore.set(data.access_token);
-          $state.go('player');
+          $state.go('player.tracks');
         }, function(response) {
           switch (response) {
             case -1:

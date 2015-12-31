@@ -63,7 +63,7 @@ angular
     TokenServiceProvider.setClientDetails('web', 'secret');
     APIProvider.setApiUrl(REST_API);
 
-    $urlRouterProvider.otherwise('/player/tracks');
+    $urlRouterProvider.otherwise('/player');
 
     $stateProvider
       .state('login', {
@@ -80,6 +80,7 @@ angular
         url: '/player',
         templateUrl: 'partials/player.html',
         controller: 'PlayerController',
+        abstract: true,
         data: {
           authorization: true
         }
@@ -90,7 +91,7 @@ angular
         controller: 'SourcesController',
       })
       .state('player.tracks', {
-        url: '/tracks',
+        url: '',
         templateUrl: 'partials/tracks.html',
       });
 
