@@ -43,7 +43,7 @@ angular
 
     // Configure for the detected environment.
     if (prod) {
-      REST_API = 'http://eigenmusik-backend.herokuapp.com';
+      REST_API = 'http://api.eigenmusik.com';
       SC_CLIENT_ID = 'f434bba227f3c05662515accf6d287fc';
       SELF_URL = 'http://www.eigenmusik.com';
 
