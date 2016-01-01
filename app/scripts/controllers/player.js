@@ -8,7 +8,7 @@
  * Player Controller of the eigenmusik
  */
 angular.module('eigenmusik')
-  .controller('PlayerController', function($scope, $rootScope, API, TrackFactory) {
+  .controller('PlayerController', function($scope, $rootScope, API, PlayableTrack) {
 
     var TRACK_RESTART_THRESHOLD = 5;
     $scope.loadingPlayer = true;
@@ -93,7 +93,7 @@ angular.module('eigenmusik')
       $scope.currentTrackNumber = trackNumber;
 
       $scope.loading = true;
-      TrackFactory.build(track).then(function(currentTrack) {
+      PlayableTrack.build(track).then(function(currentTrack) {
         if ($scope.currentTrackNumber !== trackNumber) {
           return;
         }
@@ -103,7 +103,6 @@ angular.module('eigenmusik')
         currentTrack.play();
         $scope.currentTrack = currentTrack;
         $scope.loading = false;
-        $scope.$apply();
       });
     };
 

@@ -53,6 +53,16 @@ angular.module('eigenmusik')
             });
           return ret.promise;
         },
+        getStream: function(track) {
+          var ret = $q.defer();
+          $http.get(apiUrl + '/rest/tracks/stream/' + track.id)
+            .success(function(r) {
+              ret.resolve(r);
+            }).error(function(err) {
+              ret.reject(err);
+            });
+          return ret.promise;
+        },
         addSoundcloudAccount: function(code) {
           var ret = $q.defer();
           $http.post(apiUrl + '/rest/source/soundcloud/add', code)
