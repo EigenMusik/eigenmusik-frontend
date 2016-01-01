@@ -37,7 +37,7 @@ angular.module('eigenmusik')
     };
 
     PlayableTrack.prototype.getArtist = function() {
-      return this.track.artist.name;
+      return this.track.artist
     };
 
     PlayableTrack.prototype.getTitle = function() {

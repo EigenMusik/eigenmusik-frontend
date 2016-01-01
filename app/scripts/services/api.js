@@ -65,7 +65,7 @@ angular.module('eigenmusik')
         },
         addSoundcloudAccount: function(code) {
           var ret = $q.defer();
-          $http.post(apiUrl + '/rest/source/soundcloud/add', code)
+          $http.post(apiUrl + '/rest/source/add/soundcloud', code)
             .success(function(r) {
               ret.resolve(r);
             }).error(function(err) {
