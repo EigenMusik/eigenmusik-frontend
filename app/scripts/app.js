@@ -2,7 +2,7 @@
 
 // Globals configuration.
 var REST_API;
-var SC_CLIENT_ID;
+var SC_CLIENT_ID, DRIVE_CLIENT_ID;
 var SC;
 var SELF_URL;
 
@@ -50,6 +50,7 @@ angular
     } else {
       REST_API = 'http://localhost:7070';
       SC_CLIENT_ID = '184ffc1f8e74dcb4aba252c10235a121';
+      DRIVE_CLIENT_ID = '966349423776-61l24m5utgll11hh92evc0gp93cte2hn.apps.googleusercontent.com';
       SELF_URL = 'http://localhost:9000';
     }
 
