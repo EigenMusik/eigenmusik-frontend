@@ -45,7 +45,7 @@ angular.module('eigenmusik')
         },
         getTracks: function() {
           var ret = $q.defer();
-          $http.get(apiUrl + '/rest/tracks')
+          $http.get(apiUrl + '/tracks')
             .success(function(r) {
               ret.resolve(r);
             }).error(function(err) {
@@ -55,7 +55,17 @@ angular.module('eigenmusik')
         },
         getStream: function(track) {
           var ret = $q.defer();
-          $http.get(apiUrl + '/rest/tracks/stream/' + track.id)
+          $http.get(apiUrl + '/tracks/stream/' + track.id)
+            .success(function(r) {
+              ret.resolve(r);
+            }).error(function(err) {
+              ret.reject(err);
+            });
+          return ret.promise;
+        },
+        getSourceAccounts: function() {
+          var ret = $q.defer();
+          $http.get(apiUrl + '/sources/accounts/')
             .success(function(r) {
               ret.resolve(r);
             }).error(function(err) {
@@ -65,7 +75,7 @@ angular.module('eigenmusik')
         },
         addSoundcloudAccount: function(code) {
           var ret = $q.defer();
-          $http.post(apiUrl + '/rest/source/add/soundcloud', code)
+          $http.post(apiUrl + '/sources/add/soundcloud', code)
             .success(function(r) {
               ret.resolve(r);
             }).error(function(err) {
@@ -75,7 +85,7 @@ angular.module('eigenmusik')
         },
         addGoogleDriveAccount: function(code) {
           var ret = $q.defer();
-          $http.post(apiUrl + '/rest/source/add/googledrive', code)
+          $http.post(apiUrl + '/sources/add/googledrive', code)
             .success(function(r) {
               ret.resolve(r);
             }).error(function(err) {

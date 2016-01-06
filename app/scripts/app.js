@@ -99,6 +99,7 @@ angular
   })
   // Lock down routes when token is not set.
   .run(function(TokenStore, $rootScope, $state) {
+    $rootScope.api = REST_API;
     $rootScope.$on('$stateChangeSuccess', function(event, toState) {
       if (!TokenStore.isSet() && toState.data && toState.data.authorization) {
         $state.go('login');

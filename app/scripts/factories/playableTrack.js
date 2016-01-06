@@ -10,10 +10,6 @@
 angular.module('eigenmusik')
   .factory('PlayableTrack', function($http, API) {
 
-    // jscs:disable
-
-    // jscs:enable
-
     function PlayableTrack(track, audio) {
       this.track = track;
       this.audio = audio;
@@ -37,7 +33,7 @@ angular.module('eigenmusik')
     };
 
     PlayableTrack.prototype.getArtist = function() {
-      return this.track.artist
+      return this.track.artist;
     };
 
     PlayableTrack.prototype.getTitle = function() {

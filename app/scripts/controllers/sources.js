@@ -1,6 +1,6 @@
 'use strict';
 
-/* globals SC_CLIENT_ID, SELF_URL */
+/* globals SC_CLIENT_ID, DRIVE_CLIENT_ID, SELF_URL, $ */
 
 /**
  * @ngdoc function
@@ -47,6 +47,7 @@ angular.module('eigenmusik')
         scope : 'https://www.googleapis.com/auth/drive https://www.googleapis.com/auth/drive.apps.readonly https://www.googleapis.com/auth/drive.file email profile',
         client_id : DRIVE_CLIENT_ID,
         response_type : 'code',
+        approval_prompt : 'force',
       };
       var authUrl = 'https://accounts.google.com/o/oauth2/v2/auth?' + $.param(params);
       $window.parentCallback = function(code) {
@@ -68,5 +69,19 @@ angular.module('eigenmusik')
         'Google Drive Authentication',
         'width=500,height=400'
       );
-    }
+    };
+
+    $scope.getSourceAccounts = function() {
+      API.getSourceAccounts().then(
+            function(resp) {
+                console.log(resp);
+            },
+            function(err) {
+                console.log(err);
+            }
+        );
+    };
+
+    $scope.getSourceAccounts();
+
   });
