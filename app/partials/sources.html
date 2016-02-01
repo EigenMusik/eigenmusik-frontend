@@ -2,12 +2,8 @@
    <div class="navbar">
         <div class="navbar-inner text-center">
             <ul class="nav">
-                <li><a ng-click="soundcloudAuthentication()">Soundcloud</a></li>
-                <li><a ng-click="googleDriveAuthentication()">Google Drive</a></li>
-                <li><a><s>HypeMachine</s></a></li>
-                <li><a><s>Youtube</s></a></li>
-                <li><a><s>last.fm</s></a></li>
-            </ulo>
+                <li ng-repeat="s in sourceTypes"><a ng-click="authenticate(s)">{{ s.name }}</a></li>
+            </ul>
         </div>
     </div>
 <div ui-view></div>

@@ -73,19 +73,19 @@ angular.module('eigenmusik')
             });
           return ret.promise;
         },
-        addSoundcloudAccount: function(code) {
+        getSourceTypes: function() {
           var ret = $q.defer();
-          $http.post(apiUrl + '/sources/add/soundcloud', code)
+          $http.get(apiUrl + '/sources/')
             .success(function(r) {
               ret.resolve(r);
             }).error(function(err) {
               ret.reject(err);
             });
-          return ret.promise;
+          return ret.promise;  
         },
-        addGoogleDriveAccount: function(code) {
+        addSourceAccount: function(sourceType, uri) {
           var ret = $q.defer();
-          $http.post(apiUrl + '/sources/add/googledrive', code)
+          $http.post(apiUrl + '/sources/add/' + sourceType, uri)
             .success(function(r) {
               ret.resolve(r);
             }).error(function(err) {
