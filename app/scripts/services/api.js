@@ -83,9 +83,9 @@ angular.module('eigenmusik')
             });
           return ret.promise;  
         },
-        addSourceAccount: function(sourceType, uri) {
+        addSourceAccount: function(sourceType, auth) {
           var ret = $q.defer();
-          $http.post(apiUrl + '/sources/add/' + sourceType, uri)
+          $http.post(apiUrl + '/sources/add/' + sourceType, auth)
             .success(function(r) {
               ret.resolve(r);
             }).error(function(err) {
