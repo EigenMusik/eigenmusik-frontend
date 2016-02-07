@@ -8,7 +8,9 @@
  * Player Controller of the eigenmusik
  */
 angular.module('eigenmusik')
-  .controller('PlayerController', function($scope, $rootScope, API, PlayableTrack) {
+  .controller('PlayerController', function($scope, $rootScope, API, PlayableTrack, $translatePartialLoader, TokenStore) {
+
+    $translatePartialLoader.addPart('player');
 
     var TRACK_RESTART_THRESHOLD = 5;
     $scope.loadingPlayer = true;
@@ -22,17 +24,25 @@ angular.module('eigenmusik')
       $scope.currentTrack = null;
       $scope.loading = false;
       $scope.currentTrackNumber = null;
-
-      API.getMe().then(function(user) {
-        $scope.user = user;
-        API.getTracks().then(function(r) {
-          $scope.tracks = r.content;
-          $scope.loadingPlayer = false;
-        });
-      }, function() {
-        $rootScope.$emit('logout');
-      });
     };
+
+      API.checkToken(TokenStore.get()).then(
+        function() { API.getMe().then(
+            function(user) {
+            $scope.user = user;
+              API.getTracks().then(
+                function(r) {
+                  $scope.tracks = r.content;
+                  $scope.loadingPlayer = false;
+                }
+              );
+            }
+          )
+        },
+        function() {
+          $rootScope.$emit('logout');
+        }
+      );
 
     $scope.prev = function() {
       if ($scope.currentTrack !== null && $scope.currentTrack.getCurrentTime() > TRACK_RESTART_THRESHOLD) {

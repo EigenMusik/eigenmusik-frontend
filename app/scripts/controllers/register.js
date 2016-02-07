@@ -8,7 +8,8 @@
  * Login controller of EigenMusik
  */
 angular.module('eigenmusik')
-  .controller('RegistrationController', function($scope, API, $state) {
+  .controller('RegistrationController', function($scope, API, $state, $translatePartialLoader) {
+    $translatePartialLoader.addPart('register');
     $scope.loading = false;
     $scope.alert = null;
 

@@ -22,9 +22,10 @@ angular
     'ngRoute',
     'ngSanitize',
     'ngTouch',
-    'ui.router'
+    'ui.router',
+    'pascalprecht.translate',
   ])
-  .config(function($urlRouterProvider, $stateProvider, TokenServiceProvider, APIProvider) {
+  .config(function($urlRouterProvider, $stateProvider, TokenServiceProvider, APIProvider, $translateProvider, $translatePartialLoaderProvider) {
 
     var prod;
     // Detect current environment.
@@ -53,13 +54,6 @@ angular
       DRIVE_CLIENT_ID = '966349423776-61l24m5utgll11hh92evc0gp93cte2hn.apps.googleusercontent.com';
       SELF_URL = 'http://localhost:9000';
     }
-
-    // jscs:disable
-    SC.initialize({
-      client_id: SC_CLIENT_ID,
-    });
-    // jscs:enable
-
     TokenServiceProvider.setTokenUrl(REST_API + '/oauth/token');
     TokenServiceProvider.setClientDetails('web', 'secret');
     APIProvider.setApiUrl(REST_API);
@@ -96,6 +90,16 @@ angular
         templateUrl: 'partials/tracks.html',
       });
 
+    $translatePartialLoaderProvider.addPart('login');
+    $translatePartialLoaderProvider.addPart('player');
+    $translatePartialLoaderProvider.addPart('register');
+    $translatePartialLoaderProvider.addPart('sources');
+
+    $translateProvider.useLoader('$translatePartialLoader', {
+      urlTemplate: REST_API + '/messages/{lang}/{part}'
+    });
+    $translateProvider.preferredLanguage('en');
+    $translateProvider.useSanitizeValueStrategy('sanitize');
   })
   // Lock down routes when token is not set.
   .run(function(TokenStore, $rootScope, $state) {

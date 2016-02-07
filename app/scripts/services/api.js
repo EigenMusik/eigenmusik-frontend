@@ -43,6 +43,16 @@ angular.module('eigenmusik')
             });
           return ret.promise;
         },
+        checkToken: function(token) {
+          var ret = $q.defer();
+          $http.post(REST_API + '/oauth/check_token?token=' + token)
+            .success(function(r) {
+              ret.resolve(r);
+            }).error(function(err) {
+              ret.reject(err);
+            });
+          return ret.promise;
+        },
         getTracks: function() {
           var ret = $q.defer();
           $http.get(apiUrl + '/tracks')
@@ -92,7 +102,7 @@ angular.module('eigenmusik')
               ret.reject(err);
             });
           return ret.promise;
-        }
+        },
       };
     };
   });

@@ -8,7 +8,8 @@
  * Sources controller for EigenMusik
  */
 angular.module('eigenmusik')
-  .controller('SourcesController', function($rootScope, $scope, TokenService, TokenStore, $state, API, $location, $window) {
+  .controller('SourcesController', function($rootScope, $scope, TokenService, TokenStore, $state, API, $location, $window, $translatePartialLoader) {
+    $translatePartialLoader.addPart('sources');
 
     $scope.sourceTypes = null;
 
