@@ -37,7 +37,7 @@ angular.module('eigenmusik')
                 }
               );
             }
-          )
+          );
         },
         function() {
           $rootScope.$emit('logout');

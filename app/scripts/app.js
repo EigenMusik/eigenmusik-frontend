@@ -2,8 +2,6 @@
 
 // Globals configuration.
 var REST_API;
-var SC_CLIENT_ID, DRIVE_CLIENT_ID;
-var SC;
 var SELF_URL;
 
 /**
@@ -45,13 +43,10 @@ angular
     // Configure for the detected environment.
     if (prod) {
       REST_API = 'http://api.eigenmusik.com';
-      SC_CLIENT_ID = 'f434bba227f3c05662515accf6d287fc';
       SELF_URL = 'http://www.eigenmusik.com';
 
     } else {
       REST_API = 'http://localhost:7070';
-      SC_CLIENT_ID = '184ffc1f8e74dcb4aba252c10235a121';
-      DRIVE_CLIENT_ID = '966349423776-61l24m5utgll11hh92evc0gp93cte2hn.apps.googleusercontent.com';
       SELF_URL = 'http://localhost:9000';
     }
     TokenServiceProvider.setTokenUrl(REST_API + '/oauth/token');
