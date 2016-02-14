@@ -55,7 +55,6 @@ describe('Controller: PlayerController', function() {
                 mockTrack.track = track;
                 return $q.resolve(mockTrack);
             }
-
         };
 
         mockAPI = {
