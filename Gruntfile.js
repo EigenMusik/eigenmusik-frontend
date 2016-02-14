@@ -392,6 +392,12 @@ module.exports = function (grunt) {
           cwd: 'bower_components/bootstrap/dist',
           src: 'fonts/*',
           dest: '<%= yeoman.dist %>'
+        }, {
+          expand: true,
+          src: ['**'],
+          cwd: 'eigenmusik-messages/',
+          dest: '<%= yeoman.dist %>/',
+          filter: 'isFile'
         }]
       },
       styles: {
