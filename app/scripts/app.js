@@ -91,7 +91,7 @@ angular
     $translatePartialLoaderProvider.addPart('sources');
 
     $translateProvider.useLoader('$translatePartialLoader', {
-      urlTemplate: '/messages/{part}/{lang}.json',
+      urlTemplate: '/resources/messages/{part}/{lang}.json',
       loadFailureHandler: 'messageLoaderErrorHandler'
     });
     $translateProvider.preferredLanguage('en');
