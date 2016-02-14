@@ -91,11 +91,17 @@ angular
     $translatePartialLoaderProvider.addPart('sources');
 
     $translateProvider.useLoader('$translatePartialLoader', {
-      urlTemplate: REST_API + '/messages/{lang}/{part}'
+      urlTemplate: '/messages/{part}/{lang}.json',
+      loadFailureHandler: 'messageLoaderErrorHandler'
     });
     $translateProvider.preferredLanguage('en');
     $translateProvider.useSanitizeValueStrategy('sanitize');
   })
+  .factory('messageLoaderErrorHandler', ['$q', function ($q) {
+    return function () {
+      return $q.when({});
+    };
+  }])
   // Lock down routes when token is not set.
   .run(function(TokenStore, $rootScope, $state) {
     $rootScope.api = REST_API;

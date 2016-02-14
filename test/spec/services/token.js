@@ -14,8 +14,9 @@ describe('Service: TokenService', function() {
     });
 
     // Ignore the initial template GET request with ui-router.
-    beforeEach(module(function($urlRouterProvider) {
+    beforeEach(module(function($urlRouterProvider, $translateProvider) {
         $urlRouterProvider.deferIntercept();
+        $translateProvider.translations('en', {});
     }));
 
     beforeEach(inject(function(_TokenService_, _TokenStore_, _$rootScope_, _$httpBackend_, _$http_) {

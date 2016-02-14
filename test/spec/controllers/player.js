@@ -31,8 +31,9 @@ describe('Controller: PlayerController', function() {
     beforeEach(module('eigenmusik'));
 
     // Ignore the initial template GET request with ui-router.
-    beforeEach(module(function($urlRouterProvider) {
+    beforeEach(module(function($urlRouterProvider, $translateProvider) {
         $urlRouterProvider.deferIntercept();
+        $translateProvider.translations('en', {});
     }));
 
     beforeEach(inject(function($controller, _$rootScope_, $q, _$httpBackend_) {
@@ -66,6 +67,9 @@ describe('Controller: PlayerController', function() {
                 });
             },
             getTracks: function() {
+                return $q.resolve(response);
+            },
+            checkToken: function() {
                 return $q.resolve(response);
             }
         };

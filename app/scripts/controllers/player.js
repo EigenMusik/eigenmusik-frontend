@@ -26,23 +26,23 @@ angular.module('eigenmusik')
       $scope.currentTrackNumber = null;
     };
 
-      API.checkToken(TokenStore.get()).then(
-        function() { API.getMe().then(
-            function(user) {
-            $scope.user = user;
-              API.getTracks().then(
-                function(r) {
-                  $scope.tracks = r.content;
-                  $scope.loadingPlayer = false;
-                }
-              );
-            }
-          );
-        },
-        function() {
-          $rootScope.$emit('logout');
-        }
-      );
+    API.checkToken(TokenStore.get()).then(
+      function() { API.getMe().then(
+          function(user) {
+          $scope.user = user;
+            API.getTracks().then(
+              function(r) {
+                $scope.tracks = r.content;
+                $scope.loadingPlayer = false;
+              }
+            );
+          }
+        );
+      },
+      function() {
+        $rootScope.$emit('logout');
+      }
+    );
 
     $scope.prev = function() {
       if ($scope.currentTrack !== null && $scope.currentTrack.getCurrentTime() > TRACK_RESTART_THRESHOLD) {

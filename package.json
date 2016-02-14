@@ -41,6 +41,7 @@
     "node": ">=0.10.0"
   },
   "scripts": {
+    "postinstall": "git clone git://github.com/eigenmusik/eigenmusik-messages.git app/messages",
     "test": "grunt test"
   }
 }
