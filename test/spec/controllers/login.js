@@ -7,8 +7,9 @@ describe('Controller: LoginController', function() {
     beforeEach(module('eigenmusik'));
 
     // Ignore the initial template GET request with ui-router.
-    beforeEach(module(function($urlRouterProvider) {
+    beforeEach(module(function($urlRouterProvider, $translateProvider) {
         $urlRouterProvider.deferIntercept();
+        $translateProvider.translations('en', {});
     }));
 
     beforeEach(inject(function($controller, _$rootScope_, $q, _TokenStore_, _$httpBackend_) {
@@ -49,14 +50,14 @@ describe('Controller: LoginController', function() {
         scope.username = 'incorrectUser';
         scope.login();
         $rootScope.$apply();
-        expect(scope.alert).toEqual('Incorrect username or password.');
+        expect(scope.alert).toEqual('INCORRECT_USERNAME_OR_PASSWORD');
     });
 
     it('should alert if server is down', function() {
         scope.username = 'userWithBadConnection';
         scope.login();
         $rootScope.$apply();
-        expect(scope.alert).toEqual('Couldn\'t connect to server.');
+        expect(scope.alert).toEqual('SERVER_CONNECTION_ERROR');
     });
 
     it('should get an access token for a correct user', function() {
@@ -71,6 +72,6 @@ describe('Controller: LoginController', function() {
         scope.username = 'aDodgyUser';
         scope.login();
         $rootScope.$apply();
-        expect(scope.alert).toEqual('Unknown error occurred :(');
+        expect(scope.alert).toEqual('UNKNOWN_ERROR');
     });
 });

@@ -33,6 +33,9 @@ module.exports = function(config) {
             'bower_components/angular-sanitize/angular-sanitize.js',
             'bower_components/angular-touch/angular-touch.js',
             'bower_components/angular-ui-router/release/angular-ui-router.js',
+            'bower_components/angular-translate/angular-translate.js',
+            'bower_components/angular-translate-loader-url/angular-translate-loader-url.js',
+            'bower_components/angular-translate-loader-partial/angular-translate-loader-partial.js',
             'bower_components/angular-mocks/angular-mocks.js',
             // endbower
             "app/scripts/**/*.js",
@@ -54,12 +57,12 @@ module.exports = function(config) {
         // - PhantomJS
         // - IE (only Windows)
         browsers: [
-            "PhantomJS"
+            "PhantomJS2"
         ],
 
         // Which plugins to enable
         plugins: [
-            "karma-phantomjs-launcher",
+            "karma-phantomjs2-launcher",
             "karma-jasmine",
             "karma-coverage" // required for coverage
         ],

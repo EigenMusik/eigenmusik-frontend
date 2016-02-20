@@ -1,11 +1,11 @@
 <table id="tracks-table" class="table table-fixedheader" ng-hide="tracksAreEmpty()">
     <thead>
         <tr>
-            <th>TRACK</th>
-            <th>ARTIST</th>
-            <th>TIME</th>
-            <th>ALBUM</th>
-            <th>ADDED</th>
+            <th translate>TRACK</th>
+            <th translate>ARTIST</th>
+            <th translate>TIME</th>
+            <th translate>ALBUM</th>
+            <th translate>ADDED</th>
         </tr>
     </thead>
     <tbody ng-style="tbodyStyle()">
@@ -27,8 +27,8 @@
     </tbody>
 </table>
 <div ng-show="!loadingPlayer && tracksAreEmpty()">
-    <h5 class="text-center">You haven't got any tracks connected. Let's add a <a ui-sref="player.sources">new source</a>!</h5>
+    <h5 class="text-center"><a ui-sref="player.sources" translate>ADD_NEW_SOURCE</a></h5>
 </div>
 <div ng-show="loadingPlayer">
-    <h5 class="text-center">Loading tracks...</h5>
+    <h5 class="text-center" translate>LOADING_TRACKS</h5>
 </div>

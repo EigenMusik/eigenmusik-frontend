@@ -21,7 +21,7 @@ angular.module('eigenmusik')
         register: function(userData) {
           var ret = $q.defer();
           $http({
-              url: REST_API + '/user/register',
+              url: REST_API + '/users/register',
               method: 'POST',
               data: userData,
               transformResponse: undefined
@@ -35,7 +35,17 @@ angular.module('eigenmusik')
         },
         getMe: function() {
           var ret = $q.defer();
-          $http.get(REST_API + '/user/me')
+          $http.get(REST_API + '/users/me')
+            .success(function(r) {
+              ret.resolve(r);
+            }).error(function(err) {
+              ret.reject(err);
+            });
+          return ret.promise;
+        },
+        checkToken: function(token) {
+          var ret = $q.defer();
+          $http.post(REST_API + '/oauth/check_token?token=' + token)
             .success(function(r) {
               ret.resolve(r);
             }).error(function(err) {
@@ -45,7 +55,7 @@ angular.module('eigenmusik')
         },
         getTracks: function() {
           var ret = $q.defer();
-          $http.get(apiUrl + '/rest/tracks')
+          $http.get(apiUrl + '/tracks')
             .success(function(r) {
               ret.resolve(r);
             }).error(function(err) {
@@ -55,7 +65,7 @@ angular.module('eigenmusik')
         },
         getStream: function(track) {
           var ret = $q.defer();
-          $http.get(apiUrl + '/rest/tracks/stream/' + track.id)
+          $http.get(apiUrl + '/tracks/stream/' + track.id)
             .success(function(r) {
               ret.resolve(r);
             }).error(function(err) {
@@ -63,16 +73,36 @@ angular.module('eigenmusik')
             });
           return ret.promise;
         },
-        addSoundcloudAccount: function(code) {
+        getSourceAccounts: function() {
           var ret = $q.defer();
-          $http.post(apiUrl + '/rest/source/add/soundcloud', code)
+          $http.get(apiUrl + '/sources/accounts/')
             .success(function(r) {
               ret.resolve(r);
             }).error(function(err) {
               ret.reject(err);
             });
           return ret.promise;
-        }
+        },
+        getSourceTypes: function() {
+          var ret = $q.defer();
+          $http.get(apiUrl + '/sources/')
+            .success(function(r) {
+              ret.resolve(r);
+            }).error(function(err) {
+              ret.reject(err);
+            });
+          return ret.promise;  
+        },
+        addSourceAccount: function(sourceType, auth) {
+          var ret = $q.defer();
+          $http.post(apiUrl + '/sources/add/' + sourceType, auth)
+            .success(function(r) {
+              ret.resolve(r);
+            }).error(function(err) {
+              ret.reject(err);
+            });
+          return ret.promise;
+        },
       };
     };
   });

@@ -2,8 +2,6 @@
 
 // Globals configuration.
 var REST_API;
-var SC_CLIENT_ID;
-var SC;
 var SELF_URL;
 
 /**
@@ -22,9 +20,10 @@ angular
     'ngRoute',
     'ngSanitize',
     'ngTouch',
-    'ui.router'
+    'ui.router',
+    'pascalprecht.translate',
   ])
-  .config(function($urlRouterProvider, $stateProvider, TokenServiceProvider, APIProvider) {
+  .config(function($urlRouterProvider, $stateProvider, TokenServiceProvider, APIProvider, $translateProvider, $translatePartialLoaderProvider) {
 
     var prod;
     // Detect current environment.
@@ -44,21 +43,12 @@ angular
     // Configure for the detected environment.
     if (prod) {
       REST_API = 'http://api.eigenmusik.com';
-      SC_CLIENT_ID = 'f434bba227f3c05662515accf6d287fc';
       SELF_URL = 'http://www.eigenmusik.com';
 
     } else {
       REST_API = 'http://localhost:7070';
-      SC_CLIENT_ID = '184ffc1f8e74dcb4aba252c10235a121';
       SELF_URL = 'http://localhost:9000';
     }
-
-    // jscs:disable
-    SC.initialize({
-      client_id: SC_CLIENT_ID,
-    });
-    // jscs:enable
-
     TokenServiceProvider.setTokenUrl(REST_API + '/oauth/token');
     TokenServiceProvider.setClientDetails('web', 'secret');
     APIProvider.setApiUrl(REST_API);
@@ -95,9 +85,26 @@ angular
         templateUrl: 'partials/tracks.html',
       });
 
+    $translatePartialLoaderProvider.addPart('login');
+    $translatePartialLoaderProvider.addPart('player');
+    $translatePartialLoaderProvider.addPart('register');
+    $translatePartialLoaderProvider.addPart('sources');
+
+    $translateProvider.useLoader('$translatePartialLoader', {
+      urlTemplate: '/resources/messages/{part}/{lang}.json',
+      loadFailureHandler: 'messageLoaderErrorHandler'
+    });
+    $translateProvider.preferredLanguage('en');
+    $translateProvider.useSanitizeValueStrategy('sanitize');
   })
+  .factory('messageLoaderErrorHandler', ['$q', function ($q) {
+    return function () {
+      return $q.when({});
+    };
+  }])
   // Lock down routes when token is not set.
   .run(function(TokenStore, $rootScope, $state) {
+    $rootScope.api = REST_API;
     $rootScope.$on('$stateChangeSuccess', function(event, toState) {
       if (!TokenStore.isSet() && toState.data && toState.data.authorization) {
         $state.go('login');

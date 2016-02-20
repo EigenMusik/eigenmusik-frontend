@@ -20,6 +20,7 @@ body {
     height: 100px;
     width: 100%;
     background: #eee;
+    z-index: 999;
 }
 
 #playbar-container {
