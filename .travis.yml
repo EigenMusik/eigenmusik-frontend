@@ -11,9 +11,11 @@ cache:
 deploy:
   provider: s3
   access_key_id: AKIAJSSSRJ56NH4D2WKQ
+  region: eu-central-1
+  skip_cleanup: true
   secret_access_key:
     secure: zOzFuxKrDCPAPonEh9wQEUzeeDLWi4BWSKap2HqT9jpJJhyZZKgbw9/id7WR/sB5yM5q/0KbUAVbPaelV/ZqC96vdqi2+h5Ah1s91XnkOltNyLdWgQPUoNHxnHyNrn9eoJ/1WMj36JxR5ASZVmELpt+g1gKTYY7HquVhpOQ8Riwz9nibT4z9S3htSnauserJSTeq1O+mTm1iMeFDkRX2q0FtOOO9x+WU/PxYtwunH6lBmZRSyyzROBbJK7+TLhlqBd/8Z5PvGta7DEnvIxqLgxKegcxEYeuXpsU7oekFSd+8ZxzGTmFOfO3meh8//vjP+JC01oUV8oMgi7xyh8GCnaHRBN+JKeBz8GE0+M32e0fxJvJRqAcDF7y/QVlch1jowKEQLGf+sbjFd692nY+A2fop6rbMX6amsp3zW1PWUMX0l76ma1Ry5I65VhrxvgVpW9FlNN44ZjzAW+8jfOF5wUNgDb0QqZPzrY2qZOA5FzjhVFTJ2snNF6wN7x7emYQajTfQIofFeAP+YHtIiL1mZ88K7Hm7dOkEOyutxPi8jGTwtusgS4NSdhXzevfAdQ/M2nNumBvtxxa6sx7DCs/D3LhhMJHR5Pe6W/UL2Q5ifr4sAQB352eHJwVK+DxZyGEQ/JlhXN69kRBBKdxxmYvLzNC5Eq4bAsHeoPHRcKQCRgo=
   bucket: www.eigenmusik.com
-  local-dir: dist
+  local_dir: dist
   on:
     repo: EigenMusik/eigenmusik-web
