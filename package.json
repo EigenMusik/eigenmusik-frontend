@@ -41,6 +41,7 @@
     "node": ">=0.10.0"
   },
   "scripts": {
+    "postinstall": "rm -rf eigenmusik-client-resources app/resources; git clone git://github.com/eigenmusik/eigenmusik-client-resources.git; ln -s ../eigenmusik-client-resources app/resources",
     "test": "grunt test"
   }
 }

@@ -396,7 +396,7 @@ module.exports = function (grunt) {
           expand: true,
           src: ['**'],
           cwd: 'eigenmusik-client-resources/',
-          dest: '<%= yeoman.dist %>/',
+          dest: '<%= yeoman.dist %>/resources',
           filter: 'isFile'
         }]
       },

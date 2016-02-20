@@ -5,4 +5,5 @@
 /bower_components
 /coverage
 /app/messages
-/eigenmusik-client-resources
+eigenmusik-client-resources/
+app/resources
