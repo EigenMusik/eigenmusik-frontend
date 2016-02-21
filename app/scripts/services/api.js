@@ -23,8 +23,7 @@ angular.module('eigenmusik')
           $http({
               url: REST_API + '/users/register',
               method: 'POST',
-              data: userData,
-              transformResponse: undefined
+              data: userData
             })
             .success(function(r) {
               ret.resolve(r);

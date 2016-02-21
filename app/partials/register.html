@@ -6,6 +6,10 @@
         <input type="password" class="form-control" ng-model="passwordConfirmation" placeholder="{{ 'PASSWORD_AGAIN' | translate }}" required=""/>
         <input type="email" class="form-control" ng-model="email" placeholder="{{ 'EMAIL' | translate }}" required="" autofocus="" />
         <button class="btn btn-lg btn-primary btn-block" type="submit" loading-button>{{ 'REGISTER' | translate }}</button>
-        <div ng-show="alert" class="alert alert-danger text-center" role="alert">{{alert}}</div>
+        <div ng-show="errors" class="alert alert-danger text-center" role="alert">
+            <p ng-repeat="e in errors">
+                {{ e.message | translate:'e.params' }}
+            </p>
+        </div>
     </form>
 </div>

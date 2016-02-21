@@ -11,7 +11,7 @@ angular.module('eigenmusik')
   .controller('RegistrationController', function($scope, API, $state, $translatePartialLoader) {
     $translatePartialLoader.addPart('register');
     $scope.loading = false;
-    $scope.alert = null;
+    $scope.errors = null;
 
     $scope.register = function() {
       $scope.loading = true;
@@ -22,9 +22,9 @@ angular.module('eigenmusik')
       }).then(function() {
         $scope.loading = false;
         $state.go('login');
-      }, function(err) {
+      }, function(resp) {
         $scope.loading = false;
-        $scope.alert = err;
+        $scope.errors = resp.errors;
       });
       // Remove any old token.
     };
